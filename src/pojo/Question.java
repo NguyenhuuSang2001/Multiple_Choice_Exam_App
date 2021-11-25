@@ -4,41 +4,67 @@
  */
 package pojo;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.news.orm.Annotation.Column;
+import com.news.orm.Annotation.Entity;
+import com.news.orm.Annotation.Id;
 
-/**
- *
- * @author PC
- */
-@Entity
-@Table(name = "question")
-public class Question implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "ID")
+ 
+@Entity(name = "question")
+
+public class Question {
+    @Id(name = "ID",autoIncrement = true)
+    
     private int id;
-    @Column(name = "Content")
-    private String content;
+    @Column(name = "UserID")
+    private int userId;
     @Column(name = "Topic")
     private String topic;
+    @Column(name = "Content")
+    private String content;
+
+    public Question(int id, int userId, String topic, String content) {
+        this.id = id;
+        this.userId = userId;
+        this.topic = topic;
+        this.content = content;
+    }
+    
+    
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getTopic() {
-        return topic;
+    public void setContent(String content) {
+        this.content = content;
     }
+   
+   
     
+
     
 }

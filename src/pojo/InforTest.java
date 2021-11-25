@@ -4,31 +4,22 @@
  */
 package pojo;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.news.orm.Annotation.Column;
+import com.news.orm.Annotation.Entity;
+import com.news.orm.Annotation.Id;
+
+import java.util.Date;
 
 /**
  *
  * @author PC
  */
-@Entity
-@Table(name = "infortest")
-public class InforTest implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "ID")
+@Entity(name = "infortest")
+
+public class InforTest {
+    @Id(name = "ID",autoIncrement = true) 
     private int id;
-    @Column(name = "UserID", nullable=false)
+    @Column(name = "UserID")
     private int userID;
     @Column(name = "Name")
     private String name;
@@ -37,12 +28,22 @@ public class InforTest implements Serializable{
     @Column(name = "Publish")
     private boolean publish;
     @Column(name = "DateCreate")
-    private LocalDate dateCreate;
-    @ManyToOne(optional=false)
-//    @JoinColumn(name = "UserID",insertable="false" updata="false")
-     @JoinColumn(name = "UserID", insertable=false, updatable=false)
-    private Users users;
+    private Date dateCreate;
 
+    public InforTest(int id, int userID, String name, String topic, boolean publish, Date dateCreate) {
+        this.id = id;
+        this.userID = userID;
+        this.name = name;
+        this.topic = topic;
+        this.publish = publish;
+        this.dateCreate = dateCreate;
+    }
+
+    public InforTest() {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -63,16 +64,34 @@ public class InforTest implements Serializable{
         return publish;
     }
 
-    public LocalDate getDateCreate() {
+    public Date getDateCreate() {
         return dateCreate;
     }
 
-    public Users getUsers() {
-        return users;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public void setPublish(boolean publish) {
+        this.publish = publish;
+    }
+
+    public void setDateCreate(Date dateCreate) {
+        this.dateCreate = dateCreate;
     }
     
-}
+  }
+    
+

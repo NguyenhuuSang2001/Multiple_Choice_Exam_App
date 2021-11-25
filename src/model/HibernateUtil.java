@@ -42,6 +42,7 @@ public class HibernateUtil {
                 .applySettings(conf.getProperties()).build();
         //Configuration conf = new Configuration().configure();
         FACTORY = conf.buildSessionFactory(registry);
+        System.out.println("Connected");
     }
 
     public static SessionFactory getSessionFactory() {

@@ -4,39 +4,29 @@
  */
 package pojo;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.news.orm.Annotation.Column;
+import com.news.orm.Annotation.Entity;
+import com.news.orm.Annotation.Id;
+
 
 /**
  *
  * @author PC
  */
-@Entity
-@Table(name = "users")
-public class Users implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "ID")
+@Entity(name = "user")
+
+public class Users {
+    @Id(name = "ID",autoIncrement = true)
+    
     private int id;
-    @Column(name = "Name")
+    @Id(name = "Name",autoIncrement = false)
     private String name;
     @Column(name = "Pass")
     private String pass;
     @Column(name = "IsAdmin")
-    private String isAdmin;
+    private boolean isAdmin;
     
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "users")
-    private Set<InforTest> listEmployee = new HashSet<>();
+    
     
 
     public int getId() {
@@ -51,9 +41,11 @@ public class Users implements Serializable{
         return pass;
     }
 
-    public String getIsAdmin() {
+    public boolean isIsAdmin() {
         return isAdmin;
     }
+
+   
 
     public void setId(int id) {
         this.id = id;
@@ -67,9 +59,8 @@ public class Users implements Serializable{
         this.pass = pass;
     }
 
-    public void setIsAdmin(String isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
     
 }

@@ -4,27 +4,30 @@
  */
 package pojo;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.news.orm.Annotation.Column;
+import com.news.orm.Annotation.Entity;
+import com.news.orm.Annotation.Id;
+
 
 /**
  *
  * @author PC
  */
-@Entity
-@Table(name = "testDetail")
-public class TestDetail implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "TestID")
+@Entity(name = "testDetail")
+
+public class TestDetail {
+    @Id(name = "TestId",autoIncrement = true)
+   
     private int testId;
     @Column(name = "QuestionID")
     private int questionId;
+
+    public TestDetail(int testId, int questionId) {
+        this.testId = testId;
+        this.questionId = questionId;
+    }
+    
+    
 
     public int getTestId() {
         return testId;
@@ -32,6 +35,14 @@ public class TestDetail implements Serializable{
 
     public int getQuestionId() {
         return questionId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
     
 }
