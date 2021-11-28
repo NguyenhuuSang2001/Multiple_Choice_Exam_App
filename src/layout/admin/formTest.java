@@ -30,10 +30,10 @@ public class formTest extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelName = new javax.swing.JLabel();
+        jLabelTopic = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -42,13 +42,13 @@ public class formTest extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Kiểm tra 1 tiết");
+        jLabelName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabelName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelName.setText("Kiểm tra 1 tiết");
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Toán");
+        jLabelTopic.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabelTopic.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTopic.setText("Toán");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,9 +64,9 @@ public class formTest extends javax.swing.JPanel {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("10/12/2021");
+        date.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("10/12/2021");
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,8 +86,8 @@ public class formTest extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabelTopic)
+                            .addComponent(date))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel14)
@@ -95,7 +95,7 @@ public class formTest extends javax.swing.JPanel {
                         .addComponent(jLabel12)
                         .addGap(27, 27, 27))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jLabel15))))
         );
@@ -104,12 +104,12 @@ public class formTest extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
+                    .addComponent(jLabelName)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
+                .addComponent(jLabelTopic)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
+                .addComponent(date)
                 .addGap(21, 21, 21)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -140,13 +140,13 @@ public class formTest extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    protected static javax.swing.JLabel jLabelName;
+    protected static javax.swing.JLabel jLabelTopic;
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

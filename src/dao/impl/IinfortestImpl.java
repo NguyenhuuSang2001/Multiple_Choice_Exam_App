@@ -89,12 +89,12 @@ public class IinfortestImpl implements IInfortest{
         InforTestRepository inforTestRepository= new InforTestRepositoryImpl();
         List<InforTest> listInforTests = new ArrayList<>();
         
-        listInforTests = inforTestRepository.findAll();
+        //listInforTests = inforTestRepository.findAll();
         inforTestRepository.save(inforTest);
-         
+        listInforTests = inforTestRepository.findAll();
         k = listInforTests.get(listInforTests.size()-1).getId();
         
-        return k+1;
+        return k;
     }
     
 }

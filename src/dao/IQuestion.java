@@ -15,4 +15,7 @@ import pojo.Question;
 public interface IQuestion {
     Optional<Question> getQuestionById(int questionId);
     List<Question> getListByUserIDAndTopic(int userID,String topic);
+    List<Question> getListByUserID(int userID);
+    int saveQuestion(int userID,String topic,String content);
+    boolean deleteQuestionByID(int Qid);
 }

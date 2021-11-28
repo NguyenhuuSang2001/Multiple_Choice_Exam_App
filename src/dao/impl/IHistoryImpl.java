@@ -53,5 +53,21 @@ public class IHistoryImpl implements IHistory{
         } 
         return null;
     }
+
+    @Override
+    public boolean deleteByUserID(int userId) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConnectionManager conn = new ConnectionManager();
+            try (Connection connection = conn.getConnection()) {
+                String sql = "DELETE FROM `history` WHERE UserID = "+userId+";";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.execute();
+                return true;
+              
+            } catch (SQLException ex) { 
+            Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return false;
+    }
     
 }

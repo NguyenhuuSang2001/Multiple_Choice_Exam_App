@@ -5,6 +5,7 @@
 package layout.user;
 
 import java.awt.Cursor;
+import layout.admin.admin1;
 
 /**
  *
@@ -334,6 +335,7 @@ public class user1 extends javax.swing.JFrame {
 
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
@@ -352,6 +354,9 @@ public class user1 extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
+        admin1 am = new admin1();
+        this.dispose();
+        am.show();
     }//GEN-LAST:event_jLabel_homeMouseClicked
 
     /**

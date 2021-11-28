@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package Respository.impl;
 
-import java.util.List;
+import Respository.AnswerRepository;
+import com.news.orm.impl.BaseResponsity;
+import java.io.Serializable;
 import pojo.Answer;
 
 /**
  *
  * @author PC
  */
-public interface IAnswer {
-    List<Answer> getListAnswerByQId(int quID);
-    void saveAnswer(int qID,String content,boolean iscorrect);
-    boolean deleteByQID(int qID);
+public class AnswerRepositoryImpl extends BaseResponsity<Answer, Integer> implements AnswerRepository{
+    
 }

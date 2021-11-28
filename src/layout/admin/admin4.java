@@ -4,7 +4,20 @@
  */
 package layout.admin;
 
+import dao.IHistory;
+import dao.IInfortest;
+import dao.impl.IHistoryImpl;
+import dao.impl.IinfortestImpl;
 import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import layout.login;
+import pojo.History;
+import pojo.InforTest;
 
 /**
  *
@@ -15,10 +28,35 @@ public class admin4 extends javax.swing.JFrame {
     /**
      * Creates new form admin4
      */
-    public admin4() {
+    DefaultTableModel tabelModel ;
+  
+   
+    /**
+     * Creates new form QLNLForm
+     * @throws java.lang.Exception
+     */
+    public admin4() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
+        tabelModel = (DefaultTableModel) tabel.getModel();
+        showNgachLUONG();
     }
+     private void showNgachLUONG() throws Exception{
+        IHistory i = new IHistoryImpl();
+        IInfortest in4 = new IinfortestImpl();
+        List<History> listHistory = new ArrayList<>();
+        //List<InforTest> listInforTests = new ArrayList<>();
+        
+        listHistory = i.getHistoryByUserId(login.userID);
+        tabelModel.setRowCount(0);
+        for (History lbl : listHistory) {
+            InforTest in = in4.getInforTestByTestID(lbl.getTestId());
+            tabelModel.addRow(new Object[]{
+                in.getName(),in.getTopic(),4,in.getDateCreate(),lbl.getPoint()
+                
+            });
+        }
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,7 +166,7 @@ public class admin4 extends javax.swing.JFrame {
         tabel.setForeground(new java.awt.Color(0, 0, 0));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Kiem tra hoc ky 1", "Toan",  new Integer(4), "20/10/2001",  new Integer(5)}
+
             },
             new String [] {
                 "Test Name", "Topic Name", "Number Of Questions", "Test Date ", "Point "
@@ -194,6 +232,21 @@ public class admin4 extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
+        System.out.println(login.userID);
+        IHistory i =new IHistoryImpl();
+         boolean t = i.deleteByUserID(login.userID);
+      
+      
+        if(t == true){
+         
+          DefaultTableModel model = (DefaultTableModel) tabel.getModel();
+            model.setRowCount(0);
+        }else{
+             JOptionPane.showMessageDialog(this,
+    "Lỗi xóa",
+    "Error",
+    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
@@ -213,6 +266,9 @@ public class admin4 extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
+        admin1 am = new admin1();
+        this.dispose();
+        am.show();
     }//GEN-LAST:event_jLabel_homeMouseClicked
 
     /**
@@ -245,7 +301,11 @@ public class admin4 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new admin4().setVisible(true);
+                try {
+                    new admin4().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(admin4.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

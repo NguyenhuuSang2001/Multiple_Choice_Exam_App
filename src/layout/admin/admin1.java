@@ -5,6 +5,10 @@
 package layout.admin;
 
 import java.awt.Cursor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
+import layout.login;
 
 /**
  *
@@ -41,11 +45,11 @@ public class admin1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        content = new javax.swing.JPanel();
+        jtextTen = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -124,6 +128,16 @@ public class admin1 extends javax.swing.JFrame {
         jLabel2.setText("+ New Test");
         jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
+        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel2MouseMoved(evt);
+            }
+        });
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(0, 255, 255));
         jLabel4.setForeground(new java.awt.Color(0, 153, 204));
@@ -131,21 +145,38 @@ public class admin1 extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 255)));
 
+        content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setAutoscrolls(true);
+
+        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
+        content.setLayout(contentLayout);
+        contentLayout.setHorizontalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        contentLayout.setVerticalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Hi, Huyền ");
+        jtextTen.setBackground(new java.awt.Color(255, 255, 255));
+        jtextTen.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtextTen.setForeground(new java.awt.Color(0, 0, 0));
+        jtextTen.setText("Hi "+login.us.getName()+"!");
 
         jLabel6.setBackground(new java.awt.Color(0, 255, 255));
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -154,6 +185,16 @@ public class admin1 extends javax.swing.JFrame {
         jLabel6.setText("History");
         jLabel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
+        jLabel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel6MouseMoved(evt);
+            }
+        });
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel7.setBackground(new java.awt.Color(0, 255, 255));
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -162,6 +203,16 @@ public class admin1 extends javax.swing.JFrame {
         jLabel7.setText("Log Out\n");
         jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel7.setOpaque(true);
+        jLabel7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel7MouseMoved(evt);
+            }
+        });
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel8.setBackground(new java.awt.Color(0, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -170,20 +221,16 @@ public class admin1 extends javax.swing.JFrame {
         jLabel8.setText("Question Store");
         jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel8.setOpaque(true);
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setAutoscrolls(true);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
-        );
+        jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel8MouseMoved(evt);
+            }
+        });
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -192,8 +239,8 @@ public class admin1 extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(jtextTen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel8)
@@ -207,7 +254,6 @@ public class admin1 extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(27, 27, 27))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,17 +263,16 @@ public class admin1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
+                        .addComponent(jtextTen)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8))
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,11 +299,71 @@ public class admin1 extends javax.swing.JFrame {
         jLabel_close.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jLabel_closeMouseMoved
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        admin4 st = null;
+        try {
+            st = new admin4();
+        } catch (Exception ex) {
+            Logger.getLogger(admin1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+        st.show();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
+        // TODO add your handling code here:
+        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel2MouseMoved
+
+    private void jLabel8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseMoved
+        // TODO add your handling code here:
+        jLabel8.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel8MouseMoved
+
+    private void jLabel7MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseMoved
+        // TODO add your handling code here:
+        jLabel7.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel7MouseMoved
+
+    private void jLabel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseMoved
+        // TODO add your handling code here:
+        jLabel6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel6MouseMoved
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        admin2 am = new admin2();
+        this.dispose();
+        am.show();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        admin3 am = null;
+        try {
+            am = new admin3();
+        } catch (Exception ex) {
+            Logger.getLogger(admin1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+        am.show();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        login lg = new login();
+        this.dispose();
+        lg.show();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+       // jtextTen.setText("hi");
+      
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -270,6 +375,7 @@ public class admin1 extends javax.swing.JFrame {
                     break;
                 }
             }
+           // jtextTen.setText("hi");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -281,20 +387,26 @@ public class admin1 extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+               
+               
                 new admin1().setVisible(true);
+                 
             }
         });
+        
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JPanel content;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -304,6 +416,6 @@ public class admin1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    public static javax.swing.JLabel jtextTen;
     // End of variables declaration//GEN-END:variables
 }

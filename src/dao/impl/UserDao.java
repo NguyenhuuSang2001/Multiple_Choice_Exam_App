@@ -19,8 +19,10 @@ import pojo.Users;
 public class UserDao implements IUserDAO{
 
     @Override
-    public Users findByUserNameAndPasswordAndStatus(String userName, String password, Integer status) {
-       List<Users> listUsers = new ArrayList<>();
+    public Users findByUserNameAndPasswordAndStatus(String userName, String password) {
+         List<Users> listUsers = new ArrayList<>();
+        UserRepository userRepository= new UserRepositoryImpl();
+        listUsers = userRepository.findAll();
         for(Users u:listUsers){
            
            if(u.getName().equals(userName)&& u.getPass().equals(password)){
@@ -50,7 +52,8 @@ public class UserDao implements IUserDAO{
         }
         if(t == true){
             userRepository.save(user);
-            k = listUsers.get(listUsers.size()-1).getId();
+            List<Users> ls = userRepository.findAll();
+            k = ls.get(listUsers.size()-1).getId();
         }
         return k;// neu tra ve 0 thi no chua duoc them vao trong db 
         

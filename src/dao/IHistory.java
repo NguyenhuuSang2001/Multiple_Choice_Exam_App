@@ -13,4 +13,5 @@ import pojo.History;
  */
 public interface IHistory {
     List<History> getHistoryByUserId(int userID);
+    boolean deleteByUserID(int userId);
 }

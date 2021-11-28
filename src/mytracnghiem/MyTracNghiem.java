@@ -51,16 +51,18 @@ public class MyTracNghiem {
         for(History a:l){
             System.out.println(a.getId());
         }*/
-       IInfortest i = new IinfortestImpl();
+       //IInfortest i = new IinfortestImpl();
      /*  InforTest p =new InforTest();
        p = i.getInforTestByTestID(1);
         System.out.println(p.getName()+" "+p.getId()+" "+p.getTopic()+" "+p.getUserID()+" "+p.getDateCreate());
 */
     // int k = i.saveInforTest(4, "Tiếng Nhật kt", "Tiếng Nhật", true);
       //  System.out.println(k);
-      List<Question> listQ = iq.getListByUserIDAndTopic(1, "Toan");
+    /*  List<Question> listQ = iq.getListByUserIDAndTopic(1, "Toan");
       for(Question Q:listQ){
           System.out.println(Q.getContent());
-      }
+      }*/
+    int k =iq.saveQuestion(3,"Toán", "3+4");
+        System.out.println(k);
 }
 }

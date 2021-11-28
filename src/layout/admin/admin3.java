@@ -4,7 +4,21 @@
  */
 package layout.admin;
 
+import dao.IAnswer;
+import dao.IQuestion;
+import dao.impl.IAnswerImpl;
+import dao.impl.IQuestionImpl;
 import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import layout.login;
+import pojo.Answer;
+import pojo.Question;
 
 /**
  *
@@ -15,9 +29,32 @@ public class admin3 extends javax.swing.JFrame {
     /**
      * Creates new form admin3
      */
-    public admin3() {
+    DefaultTableModel tabelModel ;
+    public admin3() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
+         tabelModel = (DefaultTableModel) tabel.getModel(); 
+         showTable();
+       this.setLocationRelativeTo(null);
+    }
+    
+    private void showTable() throws Exception{
+        IQuestion iq = new IQuestionImpl();
+        List<Question> q = iq.getListByUserID(login.userID);
+        tabelModel.setRowCount(0);
+        for (Question lbl : q) {
+            List<Answer> la = new ArrayList<>();
+            IAnswer an = new IAnswerImpl();
+            la = an.getListAnswerByQId(lbl.getId());
+            for(Answer a:la){
+                if(a.isIsCorrect()){
+                     tabelModel.addRow(new Object[]{lbl.getId(),
+               
+                lbl.getTopic(),lbl.getContent(),a.getContent(),4
+            });
+                }
+            }
+           
+        }
     }
 
     /**
@@ -49,6 +86,8 @@ public class admin3 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jtextTopic = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -173,6 +212,11 @@ public class admin3 extends javax.swing.JFrame {
         btnAddQ.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAddQ.setForeground(new java.awt.Color(0, 0, 0));
         btnAddQ.setText("Add Question");
+        btnAddQ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddQMouseClicked(evt);
+            }
+        });
 
         tabel.setBackground(new java.awt.Color(255, 255, 255));
         tabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -180,14 +224,14 @@ public class admin3 extends javax.swing.JFrame {
         tabel.setForeground(new java.awt.Color(0, 255, 255));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "1", "6", "4"}
+                { new Integer(1), "1", "1", "4", "Toán"}
             },
             new String [] {
-                "ID", "Question", "Correct Answer", "Numbers Of Answers "
+                "ID", "Question", "Correct Answer", "Numbers Of Answers ", "Topic"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -212,6 +256,15 @@ public class admin3 extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Topic");
+        jLabel10.setOpaque(true);
+
+        jtextTopic.setBackground(new java.awt.Color(255, 255, 255));
+        jtextTopic.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,13 +276,22 @@ public class admin3 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtextTopic)
+                                .addGap(175, 175, 175)
+                                .addComponent(btnAddQ, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jtextFalseAnswer2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
@@ -244,14 +306,7 @@ public class admin3 extends javax.swing.JFrame {
                                     .addComponent(jtextFalseAnswer3)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(textQuestion)
-                                .addGap(9, 9, 9))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAddQ, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)))
+                                .addGap(9, 9, 9)))))
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
@@ -277,7 +332,10 @@ public class admin3 extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(btnAddQ)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddQ)
+                    .addComponent(jtextTopic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -318,6 +376,9 @@ public class admin3 extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
+        int t= tabel.getSelectedRow();
+        System.out.println(t);
+        
         
     }//GEN-LAST:event_jLabel9MouseClicked
 
@@ -333,8 +394,58 @@ public class admin3 extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
+         admin1 am = new admin1();
+        this.dispose();
+        am.show();
 
     }//GEN-LAST:event_jLabel_homeMouseClicked
+
+    private void btnAddQMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddQMouseClicked
+        // TODO add your handling code here:
+        String content = textQuestion.getText();
+        String crectAnswer =jtextCorrectAnswer.getText();
+        String falseAnswer1 = jtextFalseAnswer1.getText();
+        String falseAnswer2 = jtextFalseAnswer2.getText();
+        String falseAnswer3 = jtextFalseAnswer3.getText();
+        String topic = jtextTopic.getText();
+        if(content.equals("")||content.isEmpty()||
+                crectAnswer.equals("")||crectAnswer.isEmpty()||
+                falseAnswer1.equals("")||falseAnswer1.isEmpty()||
+                falseAnswer2.equals("")||falseAnswer2.isEmpty()||
+                falseAnswer3.equals("")||falseAnswer3.isEmpty()||
+                topic.equals("")||topic.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+    "Yêu cầu nhập đầy đủ các trường thông tin ở trên",
+    "Error",
+    JOptionPane.ERROR_MESSAGE);
+        }else{
+            IQuestion iq = new IQuestionImpl();
+            IAnswer ia = new IAnswerImpl();
+            int k = iq.saveQuestion(login.userID, topic, content);
+            if(k == 0){
+                  JOptionPane.showMessageDialog(this,
+            "Câu hỏi đã tồn tại",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+            }else{
+                ia.saveAnswer(k, crectAnswer, true);
+                ia.saveAnswer(k, falseAnswer1, false);
+                ia.saveAnswer(k, falseAnswer2, false);
+                ia.saveAnswer(k, falseAnswer3, false);
+                 JOptionPane.showMessageDialog(this,
+            "Thêm thành công!",
+            "Thông báo",
+            JOptionPane.ERROR_MESSAGE);
+            tabelModel.addRow(new Object[]{k,
+               
+                topic,content,crectAnswer,4
+            });
+                 
+            }
+           
+        }
+        
+    }//GEN-LAST:event_btnAddQMouseClicked
 
     /**
      * @param args the command line arguments
@@ -366,7 +477,11 @@ public class admin3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new admin3().setVisible(true);
+                try {
+                    new admin3().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(admin3.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -374,6 +489,7 @@ public class admin3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddQ;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -390,6 +506,7 @@ public class admin3 extends javax.swing.JFrame {
     private javax.swing.JTextField jtextFalseAnswer1;
     private javax.swing.JTextField jtextFalseAnswer2;
     private javax.swing.JTextField jtextFalseAnswer3;
+    private javax.swing.JTextField jtextTopic;
     private javax.swing.JTable tabel;
     private javax.swing.JTextField textQuestion;
     // End of variables declaration//GEN-END:variables

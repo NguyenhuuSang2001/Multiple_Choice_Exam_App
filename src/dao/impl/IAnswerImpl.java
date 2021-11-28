@@ -4,6 +4,8 @@
  */
 package dao.impl;
 
+import Respository.*;
+import Respository.impl.*;
 import dao.IAnswer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +19,7 @@ import java.util.logging.Logger;
 import pojo.Answer;
 import pojo.InforTest;
 import pojo.Question;
+import pojo.Users;
 import responsity.ConnectionManager;
 
 /**
@@ -52,6 +55,44 @@ public class IAnswerImpl implements IAnswer{
             Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
         return null;
+    }
+
+    @Override
+    public void saveAnswer(int qID, String content, boolean iscorrect) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int k = 0;
+        boolean t = true;
+        //List<Answer> list = new ArrayList<>();
+        Answer answer = new Answer();
+        answer.setQuestionId(qID);
+        answer.setContent(content);
+        answer.setIsCorrect(iscorrect);
+       
+        AnswerRepository an = new AnswerRepositoryImpl();
+        //listUsers = userRepository.findAll();
+     
+        an.save(answer);
+            //List<> ls = userRepository.findAll();
+            //k = ls.get(listUsers.size()-1).getId();
+        
+       // return k;// neu tra ve 0 thi no chua duoc them vao trong db 
+        
+    }
+
+    @Override
+    public boolean deleteByQID(int qID) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          ConnectionManager conn = new ConnectionManager();
+            try (Connection connection = conn.getConnection()) {
+                String sql = "DELETE FROM `answer` WHERE QuestionID = "+qID+";";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.execute();
+                return true;
+              
+            } catch (SQLException ex) { 
+            Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return false;
     }
     
 }

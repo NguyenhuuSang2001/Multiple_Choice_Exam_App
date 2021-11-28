@@ -13,6 +13,6 @@ public interface JpaRepository<T,ID extends Serializable> {
     List<T> findAll();
     long count();
     List<T> findAllByAColumn(String column);
-   // boolean delete(ID id);
+    boolean delete(ID id);
    
 }

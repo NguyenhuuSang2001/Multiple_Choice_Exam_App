@@ -34,7 +34,7 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
     private  String update;
     private String select;
     private final String count;
-    private final String delete;
+    private String delete;
 
     public BaseResponsity() {
         this.tClass =(Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -259,13 +259,14 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-   /* @Override
+    @Override
     public boolean delete(ID id) {
         Field[] fields = tClass.getDeclaredFields();
         Optional<Field> fieldId =Arrays.stream(fields).filter(field -> field.isAnnotationPresent(Id.class)).findFirst();
         if(fieldId.isPresent()){
             String column = primaryColumn(tClass,fieldId.get().getName());
-            this.delete = this.delete+" Where "+column +" =?";
+            this.delete = this.delete + " Where "+column +" = "+id;
+            
         }
             ConnectionManager conn = new ConnectionManager();
             try {
@@ -280,8 +281,9 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
                 Logger.getLogger(BaseResponsity.class.getName()).log(Level.SEVERE, null, ex);
            } 
              //To change body of generated methods, choose Tools | Templates.
+             return false;
             
-    }*/
+    }
 
     @Override
     public List<T> findAllByAColumn(String column) {
