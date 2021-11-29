@@ -30,21 +30,22 @@ public class formTest extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabelName = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         jLabelTopic = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        edit = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        publish = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabelName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabelName.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelName.setText("Kiểm tra 1 tiết");
+        name.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText("Kiểm tra 1 tiết");
 
         jLabelTopic.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabelTopic.setForeground(new java.awt.Color(255, 255, 255));
@@ -68,14 +69,28 @@ public class formTest extends javax.swing.JPanel {
         date.setForeground(new java.awt.Color(255, 255, 255));
         date.setText("10/12/2021");
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-12-16.gif"))); // NOI18N
-        jLabel14.setText("Edit");
+        edit.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-12-16.gif"))); // NOI18N
+        edit.setText("Edit");
+        edit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                editMouseMoved(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("4 Question");
+
+        publish.setBackground(new java.awt.Color(0, 255, 255));
+        publish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/padlock-3-24.png"))); // NOI18N
+        publish.setText("Private");
+        publish.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                publishMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -83,38 +98,42 @@ public class formTest extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(name)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jLabel15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTopic)
                             .addComponent(date))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(publish)
+                        .addGap(8, 8, 8))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(edit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabelName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jLabel15))))
+                        .addGap(53, 53, 53))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelName)
+                    .addComponent(name)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTopic)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(date)
-                .addGap(21, 21, 21)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(date)
+                    .addComponent(publish))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -138,15 +157,25 @@ public class formTest extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseClicked
 
+    private void publishMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_publishMouseMoved
+
+    private void editMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseMoved
+        // TODO add your handling code here:
+        jLabel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_editMouseMoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel date;
+    public static javax.swing.JLabel edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    protected static javax.swing.JLabel jLabelName;
     protected static javax.swing.JLabel jLabelTopic;
     private javax.swing.JPanel jPanel5;
+    protected static javax.swing.JLabel name;
+    public static javax.swing.JLabel publish;
     // End of variables declaration//GEN-END:variables
 }

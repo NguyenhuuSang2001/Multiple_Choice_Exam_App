@@ -11,7 +11,6 @@ import dao.impl.IQuestionImpl;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -224,7 +223,7 @@ public class admin3 extends javax.swing.JFrame {
         tabel.setForeground(new java.awt.Color(0, 255, 255));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "1", "1", "4", "Toán"}
+
             },
             new String [] {
                 "ID", "Question", "Correct Answer", "Numbers Of Answers ", "Topic"
@@ -377,7 +376,24 @@ public class admin3 extends javax.swing.JFrame {
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
         int t= tabel.getSelectedRow();
-        System.out.println(t);
+      //  System.out.println(t);
+        int id = (int) tabel.getValueAt(t, 0);
+        IQuestion q = new IQuestionImpl();
+        IAnswer a= new IAnswerImpl();
+        boolean k = a.deleteByQID(id);
+        boolean h = q.deleteQuestionByID(id);
+        if(k&&h){
+             JOptionPane.showMessageDialog(this,
+    "Xóa thành công!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+             tabelModel.removeRow(t);
+        }else{
+             JOptionPane.showMessageDialog(this,
+    "Lỗi xóa",
+    "Error",
+    JOptionPane.ERROR_MESSAGE);
+        }
         
         
     }//GEN-LAST:event_jLabel9MouseClicked

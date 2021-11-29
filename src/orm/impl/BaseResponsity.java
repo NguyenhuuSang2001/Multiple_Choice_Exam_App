@@ -265,16 +265,17 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
         Optional<Field> fieldId =Arrays.stream(fields).filter(field -> field.isAnnotationPresent(Id.class)).findFirst();
         if(fieldId.isPresent()){
             String column = primaryColumn(tClass,fieldId.get().getName());
-            this.delete = this.delete + " Where "+column +" = "+id;
+            this.delete = this.delete + " Where "+column +" = ?;";
             
         }
+        System.out.println(this.delete);
             ConnectionManager conn = new ConnectionManager();
             try {
                 Connection connection = conn.getConnection();
                 PreparedStatement ps = connection.prepareStatement(this.delete);
                 ps.setObject(1,id);
                 ps.executeUpdate();
-                connection.commit();
+                //connection.commit();
                 return true;
             } catch (SQLException ex) {
                 

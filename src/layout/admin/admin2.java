@@ -279,11 +279,11 @@ public class admin2 extends javax.swing.JFrame {
             testID = in.saveInforTest(login.userID, testName, topic, publish);
             inforTest = in.getInforTestByTestID(testID);
             formTest form = new formTest();
-            form.jLabelName.setText(inforTest.getName());
+            form.name.setText(inforTest.getName());
             form.jLabelTopic.setText(inforTest.getTopic());
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            form.date.setText(dateFormat.format(inforTest.getDateCreate()));
-            admin1.content.add(form);
+          //  form.date.setText(dateFormat.format(inforTest.getDateCreate()));
+        //    admin1.content.add(form);
             System.out.println(testID);
             if(testID == 0){
                  JOptionPane.showMessageDialog(this,

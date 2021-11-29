@@ -62,7 +62,13 @@ public class MyTracNghiem {
       for(Question Q:listQ){
           System.out.println(Q.getContent());
       }*/
-    int k =iq.saveQuestion(3,"Toán", "3+4");
-        System.out.println(k);
+   // int k =iq.saveQuestion(3,"Toán", "3+4");
+     //   System.out.println(k);
+     IQuestion q = new IQuestionImpl();
+     IAnswer a= new IAnswerImpl();
+  //   boolean k = a.deleteByQID(3);
+  //   boolean t = q.deleteQuestionByID(3);
+    // System.out.println(k+" "+t);
+       // System.out.println("k".equals("k"));
 }
 }

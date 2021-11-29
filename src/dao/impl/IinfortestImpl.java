@@ -96,5 +96,35 @@ public class IinfortestImpl implements IInfortest{
         
         return k;
     }
+
+    @Override
+    public List<InforTest> getListOutOfUserId(int userId) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         List<InforTest> listInforTest = new ArrayList<>();
+        ConnectionManager conn = new ConnectionManager();
+            try (Connection connection = conn.getConnection()) {
+                String sql = "SELECT * FROM `infortest` WHERE UserID != "+userId+" and Publish = true;";
+                PreparedStatement ps = connection.prepareStatement(sql);
+               
+
+                ResultSet rs = ps.executeQuery();
+                List<InforTest> ts = new ArrayList<>();
+                while (rs.next()) {
+                  //  System.out.println(rs);
+                   InforTest in = new InforTest(rs.getInt("ID"),
+                   rs.getInt("UserID"),
+                   rs.getString("Name"),
+                   rs.getString("Topic"),
+                   rs.getBoolean("Publish"), (Date) rs.getObject("DateCreate"));
+                    ts.add(in);
+                }
+               
+                return ts;
+              
+            } catch (SQLException ex) { 
+            Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return null;
+    }
     
 }

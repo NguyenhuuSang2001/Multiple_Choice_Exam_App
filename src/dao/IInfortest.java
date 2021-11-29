@@ -15,6 +15,7 @@ import pojo.InforTest;
  */
 public interface IInfortest {
     List<InforTest> getListByUserId(int userId);
+    List<InforTest> getListOutOfUserId(int userId);
     InforTest getInforTestByTestID(int testID);
     int saveInforTest(int userId,String name,String topic,boolean publish);
 }

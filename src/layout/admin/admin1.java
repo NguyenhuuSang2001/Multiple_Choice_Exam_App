@@ -4,11 +4,25 @@
  */
 package layout.admin;
 
+import dao.IInfortest;
+import dao.impl.IinfortestImpl;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+//import static layout.create.test.content;
 import layout.login;
+import pojo.InforTest;
 
 /**
  *
@@ -22,8 +36,65 @@ public class admin1 extends javax.swing.JFrame {
     public admin1() {
         initComponents();
         //center form
+        load_test();
         this.setLocationRelativeTo(null);
         jLabel_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("../../images/x.png")));
+    }
+
+    public void load_test() {
+       
+       content.setVisible(false);
+//        content.setBackground(Color.red);
+        content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        JPanel box = new JPanel();
+//        box.setPreferredSize(new Dimension(content.getWidth()-25, content.getHeight()*2));
+        box.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
+        box.setBackground(Color.white);
+        IInfortest in4 = new IinfortestImpl();
+        List<InforTest> list1 = new ArrayList<>();// chua tk test do no tao ra
+        List<InforTest> list2 = new ArrayList<>();//chua tk test khac publish
+        list1 = in4.getListByUserId(login.userID);
+        list2 = in4.getListOutOfUserId(login.userID);
+        int h_test=0 , n_test = 11;
+        for(int i=0; i<list1.size(); i++) {
+            formTest a_test = new formTest();
+//        a_test.setPreferredSize(new Dimension(300, 100));
+            a_test.name.setText(list1.get(i).getName());
+            a_test.jLabelTopic.setText(list1.get(i).getTopic());
+            DateFormat d = new SimpleDateFormat();
+            a_test.date.setText(d.format(list1.get(i).getDateCreate()));
+            if(list1.get(i).isPublish()){
+                a_test.publish.setText("Publish");
+            }
+            box.add(a_test);
+            h_test = a_test.getHeight();
+        }
+       for(int i=0; i<list2.size(); i++) {
+            formTest a_test = new formTest();
+//        a_test.setPreferredSize(new Dimension(300, 100));
+            a_test.name.setText(list2.get(i).getName());
+            a_test.jLabelTopic.setText(list2.get(i).getTopic());
+            DateFormat d = new SimpleDateFormat();
+            a_test.date.setText(d.format(list2.get(i).getDateCreate()));
+           
+            a_test.publish.setText("Publish");
+            a_test.edit.show(false);
+            box.add(a_test);
+            h_test = a_test.getHeight();
+        }
+        box.setPreferredSize(new Dimension(content.getWidth()-25, (n_test+1)/2*160));
+
+        box.setVisible(true);
+        JScrollPane jScrollPane = new JScrollPane(box);
+        jScrollPane.setBorder(BorderFactory.createEmptyBorder());
+//        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight()-25));
+        jScrollPane.setVisible(true);
+        content.add(jScrollPane);
+        content.setVisible(true);
+        System.out.println(jScrollPane.getHeight());
+
     }
 
     /**
@@ -44,12 +115,12 @@ public class admin1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        content = new javax.swing.JPanel();
         jtextTen = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        content = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -142,37 +213,6 @@ public class admin1 extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(0, 255, 255));
         jLabel4.setForeground(new java.awt.Color(0, 153, 204));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 255)));
-
-        content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setAutoscrolls(true);
-
-        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
-        content.setLayout(contentLayout);
-        contentLayout.setHorizontalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        contentLayout.setVerticalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jtextTen.setBackground(new java.awt.Color(255, 255, 255));
         jtextTen.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtextTen.setForeground(new java.awt.Color(0, 0, 0));
@@ -232,6 +272,15 @@ public class admin1 extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setToolTipText("");
+        jScrollPane1.setInheritsPopupMenu(true);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(400, 400));
+
+        content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setMaximumSize(new java.awt.Dimension(400, 400));
+        jScrollPane1.setViewportView(content);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -240,7 +289,7 @@ public class admin1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jtextTen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel8)
@@ -253,7 +302,7 @@ public class admin1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(27, 27, 27))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +319,8 @@ public class admin1 extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jLabel8))
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -362,8 +410,8 @@ public class admin1 extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-       // jtextTen.setText("hi");
-      
+        // jtextTen.setText("hi");
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -375,7 +423,7 @@ public class admin1 extends javax.swing.JFrame {
                     break;
                 }
             }
-           // jtextTen.setText("hi");
+            // jtextTen.setText("hi");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -387,22 +435,18 @@ public class admin1 extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
-               
+
                 new admin1().setVisible(true);
-                 
+
             }
         });
-        
-       
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JPanel content;
+    private javax.swing.JPanel content;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -413,9 +457,9 @@ public class admin1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_close;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel jtextTen;
     // End of variables declaration//GEN-END:variables
 }
