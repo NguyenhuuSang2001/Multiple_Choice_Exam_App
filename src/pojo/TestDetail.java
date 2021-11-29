@@ -16,8 +16,8 @@ import com.news.orm.Annotation.Id;
 @Entity(name = "testDetail")
 
 public class TestDetail {
-    @Id(name = "TestId",autoIncrement = true)
-   
+  //  @Id(name = "TestId",autoIncrement = true)
+   @Column(name = "TestId")
     private int testId;
     @Column(name = "QuestionID")
     private int questionId;

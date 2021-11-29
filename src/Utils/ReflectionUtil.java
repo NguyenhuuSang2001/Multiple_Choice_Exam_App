@@ -67,9 +67,9 @@ public class ReflectionUtil {
             }
            
             try {
-                System.out.println(columnName);         
+                //System.out.println(columnName);         
                 set(field,t,rs.getObject(columnName));
-                System.out.println(rs.getObject(columnName));
+               // System.out.println(rs.getObject(columnName));
                 
             } catch (SQLException e) {
                 throw new OrmException(e.getMessage());

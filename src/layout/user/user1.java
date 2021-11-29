@@ -4,8 +4,23 @@
  */
 package layout.user;
 
+import dao.IAnswer;
+import dao.IQuestion;
+import dao.impl.IAnswerImpl;
+import dao.impl.IQuestionImpl;
 import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import javax.swing.JRadioButton;
 import layout.admin.admin1;
+import pojo.Answer;
+import pojo.PointOfTest;
+import pojo.Question;
+import pojo.TestDetail;
 
 /**
  *
@@ -16,11 +31,96 @@ public class user1 extends javax.swing.JFrame {
     /**
      * Creates new form user1
      */
-    public user1() {
+    private int idTest;
+    private String nameTest;
+    private String topicName;
+    private List<TestDetail> listTest;
+    private List<Question> listQuestion;
+    private List<PointOfTest> listPointOfTests;
+    public user1(int idTest,String nameTest,String topicNam,List<TestDetail> listTest) {
+        this.listTest = listTest;
+        this.idTest = idTest;
+        this.nameTest = nameTest;
+        this.topicName = topicName;
+        IQuestion iQuestion = new IQuestionImpl();
+    //    this.listQuestion = iQuestion.getQuestionById();
+        if(listTest.size()>0){
+            for(TestDetail t:listTest){
+                Optional<Question> q = iQuestion.getQuestionById(t.getQuestionId());
+                Question question = q.orElseThrow();
+                this.listQuestion.add(question);
+            }
+        }
+        showQ();
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    public void showQ(){
+        QContent.setText(listQuestion.get(0).getContent());
+        List<Answer> listAnswers = new ArrayList<>();
+        IAnswer iAnswer = new IAnswerImpl();
+        listAnswers = iAnswer.getListAnswerByQId(listQuestion.get(0).getId());
+        ArrayList<Integer> listRandom = swap(3);
+        Map<JRadioButton,Boolean> map = new HashMap<JRadioButton, Boolean>();
+        int k = 1;
+       // JRadioButton
+        answer1.setText(listAnswers.get(listRandom.get(0)).getContent());
+        map.put(answer1, listAnswers.get(listRandom.get(0)).isIsCorrect());
+        answer2.setText(listAnswers.get(listRandom.get(1)).getContent());
+        map.put(answer2, listAnswers.get(listRandom.get(1)).isIsCorrect());
+        answer3.setText(listAnswers.get(listRandom.get(2)).getContent());
+        map.put(answer2, listAnswers.get(listRandom.get(2)).isIsCorrect());
+        answer4.setText(listAnswers.get(listRandom.get(3)).getContent());
+        map.put(answer4, listAnswers.get(listRandom.get(3)).isIsCorrect());
+    
+    }
+    public user1() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    public int getIdTest() {
+        return idTest;
+    }
+
+    public void setIdTest(int idTest) {
+        this.idTest = idTest;
+    }
+
+    public String getNameTest() {
+        return nameTest;
+    }
+
+    public void setNameTest(String nameTest) {
+        this.nameTest = nameTest;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+    
+     public ArrayList<Integer> swap(int n){
+        ArrayList<Integer> list = new ArrayList<>();
+        int upper = n;
+        for(int i=0; i<n; ++i){
+            list.add(i);
+        }
+
+        ArrayList<Integer> result = new ArrayList();
+        Random random = new Random();
+        for (int i=0; i<n; ++i){
+            int ind = random.nextInt(upper);
+            result.add(list.get(ind));
+            list.remove(ind);
+            --upper;
+        }
+
+        return result;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,6 +130,7 @@ public class user1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -42,16 +143,12 @@ public class user1 extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         QName = new javax.swing.JLabel();
         QContent = new javax.swing.JLabel();
-        jlabelAnswerA = new javax.swing.JLabel();
-        jlabelAnswerD = new javax.swing.JLabel();
-        jlabelAnswerB = new javax.swing.JLabel();
-        jlabelAnswerC = new javax.swing.JLabel();
-        btnA = new javax.swing.JButton();
-        btnC = new javax.swing.JButton();
-        btnB = new javax.swing.JButton();
-        btnD = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        answer2 = new javax.swing.JRadioButton();
+        answer3 = new javax.swing.JRadioButton();
+        answer4 = new javax.swing.JRadioButton();
+        answer1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -134,12 +231,12 @@ public class user1 extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Toán");
+        jLabel4.setText(this.topicName);
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Kiem tra 1 tiet");
+        jLabel5.setText(this.nameTest);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -147,48 +244,12 @@ public class user1 extends javax.swing.JFrame {
         QName.setBackground(new java.awt.Color(255, 255, 255));
         QName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         QName.setForeground(new java.awt.Color(0, 0, 0));
-        QName.setText("Question 4: ");
+        QName.setText("Question 1: ");
 
         QContent.setBackground(new java.awt.Color(255, 255, 255));
         QContent.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         QContent.setForeground(new java.awt.Color(0, 0, 0));
         QContent.setText("4+2 ");
-
-        jlabelAnswerA.setBackground(new java.awt.Color(255, 255, 255));
-        jlabelAnswerA.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jlabelAnswerA.setForeground(new java.awt.Color(0, 0, 0));
-        jlabelAnswerA.setText("A: 6");
-
-        jlabelAnswerD.setBackground(new java.awt.Color(255, 255, 255));
-        jlabelAnswerD.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jlabelAnswerD.setForeground(new java.awt.Color(0, 0, 0));
-        jlabelAnswerD.setText("D: 0");
-
-        jlabelAnswerB.setBackground(new java.awt.Color(255, 255, 255));
-        jlabelAnswerB.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jlabelAnswerB.setForeground(new java.awt.Color(0, 0, 0));
-        jlabelAnswerB.setText("B: 2");
-
-        jlabelAnswerC.setBackground(new java.awt.Color(255, 255, 255));
-        jlabelAnswerC.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jlabelAnswerC.setForeground(new java.awt.Color(0, 0, 0));
-        jlabelAnswerC.setText("C: 1");
-
-        btnA.setBackground(new java.awt.Color(102, 255, 255));
-        btnA.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnA.setText("A");
-
-        btnC.setBackground(new java.awt.Color(102, 255, 255));
-        btnC.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnC.setText("C");
-
-        btnB.setBackground(new java.awt.Color(102, 255, 255));
-        btnB.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnB.setText("B");
-
-        btnD.setBackground(new java.awt.Color(102, 255, 255));
-        btnD.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnD.setText("D");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow-94-24.png"))); // NOI18N
         jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -209,68 +270,64 @@ public class user1 extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(answer2);
+        answer2.setText("jRadioButton1");
+
+        buttonGroup1.add(answer3);
+        answer3.setText("jRadioButton2");
+
+        buttonGroup1.add(answer4);
+        answer4.setText("jRadioButton3");
+
+        buttonGroup1.add(answer1);
+        answer1.setText("jRadioButton4");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlabelAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(QName)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(QContent, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jlabelAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlabelAnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlabelAnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(btnA)
-                                .addGap(70, 70, 70)
-                                .addComponent(btnB)
-                                .addGap(67, 67, 67)
-                                .addComponent(btnC)
-                                .addGap(61, 61, 61)
-                                .addComponent(btnD)))
-                        .addGap(0, 71, Short.MAX_VALUE))
+                        .addComponent(QName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(QContent, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 137, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(answer1)
+                    .addComponent(answer2)
+                    .addComponent(answer3)
+                    .addComponent(answer4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(QName)
                     .addComponent(QContent))
+                .addGap(26, 26, 26)
+                .addComponent(answer1)
                 .addGap(18, 18, 18)
-                .addComponent(jlabelAnswerA)
+                .addComponent(answer2)
                 .addGap(18, 18, 18)
-                .addComponent(jlabelAnswerB)
+                .addComponent(answer3)
                 .addGap(18, 18, 18)
-                .addComponent(jlabelAnswerC)
-                .addGap(18, 18, 18)
-                .addComponent(jlabelAnswerD)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnA)
-                    .addComponent(btnC)
-                    .addComponent(btnD)
-                    .addComponent(btnB))
-                .addGap(18, 18, 18)
+                .addComponent(answer4)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -281,16 +338,16 @@ public class user1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(309, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -305,8 +362,9 @@ public class user1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,10 +455,11 @@ public class user1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel QContent;
     private javax.swing.JLabel QName;
-    private javax.swing.JButton btnA;
-    private javax.swing.JButton btnB;
-    private javax.swing.JButton btnC;
-    private javax.swing.JButton btnD;
+    private javax.swing.JRadioButton answer1;
+    private javax.swing.JRadioButton answer2;
+    private javax.swing.JRadioButton answer3;
+    private javax.swing.JRadioButton answer4;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -413,9 +472,5 @@ public class user1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel jlabelAnswerA;
-    private javax.swing.JLabel jlabelAnswerB;
-    private javax.swing.JLabel jlabelAnswerC;
-    private javax.swing.JLabel jlabelAnswerD;
     // End of variables declaration//GEN-END:variables
 }

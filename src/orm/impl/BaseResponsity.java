@@ -135,7 +135,7 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
         map.put(primary.get(),index.getAndIncrement());
         set.deleteCharAt(set.length()-1);
         this.update = String.format(this.update,set,condition);
-        System.out.println(this.update);
+       // System.out.println(this.update);
 
           ConnectionManager conn = new ConnectionManager();
         try{
@@ -168,7 +168,7 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
             return Optional.empty();
         }
         this.select = this.select+" Where "+primaryColumn(tClass,field.get().getName()) +" = ?";
-      System.out.println(this.select);
+      //System.out.println(this.select);
         ConnectionManager conn = new ConnectionManager();
         try (Connection connection = conn.getConnection()){
             PreparedStatement ps = connection.prepareStatement(this.select);
@@ -268,7 +268,7 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
             this.delete = this.delete + " Where "+column +" = ?;";
             
         }
-        System.out.println(this.delete);
+      //  System.out.println(this.delete);
             ConnectionManager conn = new ConnectionManager();
             try {
                 Connection connection = conn.getConnection();

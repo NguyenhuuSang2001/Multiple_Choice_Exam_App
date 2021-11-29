@@ -2,18 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package Respository;
 
-import java.util.List;
+import java.io.Serializable;
+import orm.JpaRepository;
 import pojo.TestDetail;
 
 /**
  *
  * @author PC
  */
-public interface ItestDetail {
-    List<TestDetail> getByTestId(int testId);
-    boolean saveQuestionInTest(int testID,int quiID);
-    boolean delete(int testId,int quiId);
-    int countQuestionInTest(int testID);
+public interface TestDetailRepository extends JpaRepository<TestDetail, Integer>{
+    
 }

@@ -4,6 +4,9 @@
  */
 package dao.impl;
 
+import Respository.TestDetailRepository;
+import Respository.impl.TestDetailRepositoryImpl;
+import com.news.orm.impl.BaseResponsity;
 import dao.ItestDetail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,6 +52,45 @@ public class ItestDetailImpl implements ItestDetail{
             Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
         return null;
+    }
+
+    @Override
+    public boolean saveQuestionInTest(int testID, int quiID) {
+        boolean tr = true; 
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TestDetailRepository te = new TestDetailRepositoryImpl();
+        TestDetail test = new TestDetail(testID,quiID);
+        List<TestDetail> list = this.getByTestId(testID);
+        for(TestDetail t:list){
+            if(t.getQuestionId() == quiID){
+                tr = false;
+                return false;
+            }
+        }
+        if(tr){
+            te.save(test);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delete(int testId, int quiId) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ConnectionManager conn = new ConnectionManager();
+            try {
+                Connection connection = conn.getConnection();
+                String sql = "DELETE FROM `testdetail` WHERE TestID = "+testId+" and QuestionID = "+quiId+";";
+                PreparedStatement ps = connection.prepareStatement(sql);
+               // ps.setObject(1,id);
+                ps.executeUpdate();
+                //connection.commit();
+                return true;
+            } catch (SQLException ex) {
+                
+                Logger.getLogger(BaseResponsity.class.getName()).log(Level.SEVERE, null, ex);
+           } 
+             //To change body of generated methods, choose Tools | Templates.
+             return false;
     }
     
 }

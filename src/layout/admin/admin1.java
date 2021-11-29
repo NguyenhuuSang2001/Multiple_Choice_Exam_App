@@ -57,7 +57,7 @@ public class admin1 extends javax.swing.JFrame {
         list2 = in4.getListOutOfUserId(login.userID);
         int h_test=0 , n_test = 11;
         for(int i=0; i<list1.size(); i++) {
-            formTest a_test = new formTest();
+            formTest a_test = new formTest(list1.get(i).getId());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list1.get(i).getName());
             a_test.jLabelTopic.setText(list1.get(i).getTopic());
@@ -67,10 +67,15 @@ public class admin1 extends javax.swing.JFrame {
                 a_test.publish.setText("Publish");
             }
             box.add(a_test);
+          
+            a_test.setK(list1.get(i).getId());
+            a_test.setDatecr(d.format(list1.get(i).getDateCreate()));
+            a_test.setNameTe(list1.get(i).getName());
+            a_test.setTopic(list1.get(i).getTopic());
             h_test = a_test.getHeight();
         }
        for(int i=0; i<list2.size(); i++) {
-            formTest a_test = new formTest();
+            formTest a_test = new formTest(list2.get(i).getId());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list2.get(i).getName());
             a_test.jLabelTopic.setText(list2.get(i).getTopic());

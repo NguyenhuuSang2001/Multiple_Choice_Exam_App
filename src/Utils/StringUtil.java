@@ -26,7 +26,7 @@ public class StringUtil {
                 databaseName.append(chars[i]);
             }
         }
-        System.out.println(databaseName);
+        //System.out.println(databaseName);
         return databaseName.toString();
     }
 

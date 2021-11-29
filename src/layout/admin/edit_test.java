@@ -4,16 +4,131 @@
  */
 package layout;
 
+import dao.IAnswer;
+import dao.IQuestion;
+import dao.ItestDetail;
+import dao.impl.IAnswerImpl;
+import dao.impl.IQuestionImpl;
+import dao.impl.ItestDetailImpl;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+import layout.admin.admin1;
+import pojo.Answer;
+import pojo.Question;
+import pojo.TestDetail;
 
 /**
  *
  * @author Asus
  */
 public class edit_test extends javax.swing.JFrame {
+    private int testId;
+    private String testName;
+    private String topicName;
+    private String dateCreate;
+    DefaultTableModel tabelModel1 ;
+    DefaultTableModel tabelModel2 ;
+    public edit_test(int testId,String testName,String topicName,String dateCreate) throws Exception {
+       this.testId = testId;
+       this.testName = testName;
+       this.topicName = topicName;
+       this.dateCreate = dateCreate;
+       initComponents();
+        tabelModel1 = (DefaultTableModel) jTable1.getModel(); 
+        showTable1();
+        tabelModel2 = (DefaultTableModel) jTable2.getModel(); 
+        showTable2();
+       this.setLocationRelativeTo(null);
+        
+    }
+
+    public edit_test(){
+        
+    }
+    
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public String getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(String dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+    
+    
+    private void showTable1() throws Exception{
+        IQuestion iq = new IQuestionImpl();
+        List<Question> q = iq.getListByUserID(login.userID);
+        ItestDetail i = new ItestDetailImpl();
+        List<TestDetail> listTestDetail = i.getByTestId(this.testId);
+        tabelModel1.setRowCount(0);
+        if(listTestDetail.size()>0){
+        for (Question lbl : q) {
+           boolean check = true;
+           
+           for(TestDetail t:listTestDetail){
+               //System.out.println(lbl.getId());
+              // System.out.println(t.getQuestionId());
+               if(lbl.getId() == t.getQuestionId()){
+                   check = false;
+               }
+           }
+           System.out.println(check);
+           if(check){
+                     tabelModel1.addRow(new Object[]{lbl.getId(),lbl.getContent()
+            });
+           }
+           
+        }}
+    }
+    private void showTable2() throws Exception{
+        ItestDetail i = new ItestDetailImpl();
+        List<TestDetail> listTestDetail = i.getByTestId(this.testId);
+        tabelModel2.setRowCount(0);
+        for (TestDetail lbl : listTestDetail) {
+            IQuestion iq = new IQuestionImpl();
+          //  System.out.println("id: "+lbl.getQuestionId());
+            Optional<Question> q = iq.getQuestionById(lbl.getQuestionId());
+            Question u = q.orElseThrow();
+            tabelModel2.addRow(new Object[]{lbl.getQuestionId(),u.getContent()
+            });
+        }
+        //System.out.println(this.testId);
+    }
 
     private static void setSize() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -22,9 +137,7 @@ public class edit_test extends javax.swing.JFrame {
     /**
      * Creates new form edit_test
      */
-    public edit_test() {
-        initComponents();
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,13 +151,10 @@ public class edit_test extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel_Minimize2 = new javax.swing.JLabel();
         jLabel_Close2 = new javax.swing.JLabel();
         jLabel_App2 = new javax.swing.JLabel();
+        jLabel_home = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField_TestName = new javax.swing.JTextField();
-        jTextField_Topic = new javax.swing.JTextField();
-        jButton_Save = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -59,7 +169,9 @@ public class edit_test extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -71,23 +183,6 @@ public class edit_test extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(179, 50));
-
-        jLabel_Minimize2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Minimize2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Minimize2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Minimize2.setText("-");
-        jLabel_Minimize2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255)));
-        jLabel_Minimize2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_Minimize2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel_Minimize2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel_Minimize2MouseExited(evt);
-            }
-        });
 
         jLabel_Close2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Close2.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,15 +206,29 @@ public class edit_test extends javax.swing.JFrame {
         jLabel_App2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-12-16.gif"))); // NOI18N
         jLabel_App2.setText("Edit Test");
 
+        jLabel_home.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-5-24.png"))); // NOI18N
+        jLabel_home.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel_homeMouseMoved(evt);
+            }
+        });
+        jLabel_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_homeMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel_App2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_Minimize2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_home, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_Close2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -127,65 +236,15 @@ public class edit_test extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_App2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Minimize2)
-                    .addComponent(jLabel_Close2))
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel_home, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jLabel_Close2)
+                    .addComponent(jLabel_App2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTextField_TestName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_TestName.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField_TestName.setText("testname");
-        jTextField_TestName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField_TestNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField_TestNameFocusLost(evt);
-            }
-        });
-        jTextField_TestName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTextField_TestNameMouseEntered(evt);
-            }
-        });
-        jTextField_TestName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_TestNameActionPerformed(evt);
-            }
-        });
-
-        jTextField_Topic.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_Topic.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField_Topic.setText("topic");
-        jTextField_Topic.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField_TopicFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField_TopicFocusLost(evt);
-            }
-        });
-
-        jButton_Save.setBackground(new java.awt.Color(0, 153, 255));
-        jButton_Save.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_Save.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_Save.setText("Save");
-        jButton_Save.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton_SaveMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton_SaveMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton_SaveMouseExited(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -310,6 +369,11 @@ public class edit_test extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow-3-24.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -318,6 +382,11 @@ public class edit_test extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow-94-24.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -334,7 +403,7 @@ public class edit_test extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -359,6 +428,21 @@ public class edit_test extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setText( this.testName);
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setText(this.topicName);
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setText(this.dateCreate);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -366,15 +450,13 @@ public class edit_test extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jTextField_TestName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jTextField_Topic, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(jButton_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 80, Short.MAX_VALUE))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -384,12 +466,10 @@ public class edit_test extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField_TestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField_Topic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton_Save))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -399,7 +479,7 @@ public class edit_test extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,26 +504,9 @@ public class edit_test extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel_Minimize2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize2MouseClicked
-        // TODO add your handling code here:
-        this.setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel_Minimize2MouseClicked
-
-    private void jLabel_Minimize2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize2MouseEntered
-        // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(1,1,1,1, Color.white);
-        jLabel_Minimize2.setBorder(label_border);
-    }//GEN-LAST:event_jLabel_Minimize2MouseEntered
-
-    private void jLabel_Minimize2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize2MouseExited
-        // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(0,0,0,0, Color.black);
-        jLabel_Minimize2.setBorder(label_border);
-    }//GEN-LAST:event_jLabel_Minimize2MouseExited
-
     private void jLabel_Close2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Close2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+       System.exit(0);
     }//GEN-LAST:event_jLabel_Close2MouseClicked
 
     private void jLabel_Close2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Close2MouseEntered
@@ -458,62 +521,6 @@ public class edit_test extends javax.swing.JFrame {
         jLabel_Close2.setBorder(label_border);
     }//GEN-LAST:event_jLabel_Close2MouseExited
 
-    private void jTextField_TestNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_TestNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_TestNameActionPerformed
-
-    private void jTextField_TestNameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_TestNameMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_TestNameMouseEntered
-
-    private void jTextField_TestNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TestNameFocusGained
-        // TODO add your handling code here:
-        if(jTextField_TestName.getText().trim().toLowerCase().equals("testname")){
-            jTextField_TestName.setText("");
-            jTextField_TestName.setForeground(Color.black);
-//            Border jTextField_border = BorderFactory.createMatteBorder(0,0,1,0, Color.black);
-//            jTextField_Username.setBorder(jTextField_border);
-        }
-    }//GEN-LAST:event_jTextField_TestNameFocusGained
-
-    private void jTextField_TestNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TestNameFocusLost
-        // TODO add your handling code here:
-        if(jTextField_TestName.getText().trim().equals("") ||
-           jTextField_TestName.getText().trim().toLowerCase().equals("testname")){
-            jTextField_TestName.setText("testname");
-            jTextField_TestName.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_jTextField_TestNameFocusLost
-
-    private void jTextField_TopicFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TopicFocusGained
-        // TODO add your handling code here:
-        if(jTextField_Topic.getText().trim().toLowerCase().equals("topic")){
-            jTextField_Topic.setText("");
-            jTextField_Topic.setForeground(Color.black);
-//            Border jTextField_border = BorderFactory.createMatteBorder(0,0,1,0, Color.black);
-//            jTextField_Username.setBorder(jTextField_border);
-        }
-    }//GEN-LAST:event_jTextField_TopicFocusGained
-
-    private void jTextField_TopicFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TopicFocusLost
-        // TODO add your handling code here:
-        if(jTextField_Topic.getText().trim().equals("") ||
-           jTextField_Topic.getText().trim().toLowerCase().equals("topic")){
-            jTextField_Topic.setText("topic");
-            jTextField_Topic.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_jTextField_TopicFocusLost
-
-    private void jButton_SaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SaveMouseEntered
-        // TODO add your handling code here:
-        jButton_Save.setBackground(new Color(0,204,255));
-    }//GEN-LAST:event_jButton_SaveMouseEntered
-
-    private void jButton_SaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SaveMouseExited
-        // TODO add your handling code here:
-        jButton_Save.setBackground(new Color(0,135,255));
-    }//GEN-LAST:event_jButton_SaveMouseExited
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -522,11 +529,69 @@ public class edit_test extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton_SaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SaveMouseClicked
+    private void jLabel_homeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseMoved
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jButton_SaveMouseClicked
+        jLabel_home.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel_homeMouseMoved
+
+    private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
+        // TODO add your handling code here:
+        admin1 am = new admin1();
+        this.dispose();
+        am.show();
+        //System.out.println("testid"+this.testId);
+
+    }//GEN-LAST:event_jLabel_homeMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        int t = jTable1.getSelectedRow();
+        if(t>-1){
+        int Qid = (int) jTable1.getValueAt(t, 0);
+        String ctn = String.valueOf(jTable1.getValueAt(t, 0));
+        ItestDetail i = new ItestDetailImpl();
+        boolean dg = i.saveQuestionInTest(this.testId, Qid);
+        if(dg){
+            tabelModel2.addRow(new Object[]{Qid,ctn
+            });
+            tabelModel1.removeRow(t);
+             JOptionPane.showMessageDialog(this,
+    "Thêm thành công!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+        }else{
+             JOptionPane.showMessageDialog(this,
+    "Thêm thất bại!",
+    "ERROR",
+    JOptionPane.ERROR_MESSAGE);
+        }}
+        System.out.println(this.dateCreate);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        int t = jTable2.getSelectedRow();
+        if(t>-1){
+        int Qid = (int) jTable2.getValueAt(t, 0);
+        String ctn = String.valueOf(jTable2.getValueAt(t, 0));
+        ItestDetail i = new ItestDetailImpl();
+        boolean dg = i.delete(testId, Qid);
+        if(dg){
+            tabelModel1.addRow(new Object[]{Qid,ctn
+            });
+            tabelModel2.removeRow(t);
+             JOptionPane.showMessageDialog(this,
+    "Xóa thành công!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+        }else{
+             JOptionPane.showMessageDialog(this,
+    "Xóa thất bại!",
+    "ERROR",
+    JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -559,23 +624,28 @@ public class edit_test extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new edit_test().setVisible(true);
+                try {
+                    new edit_test().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(edit_test.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton_Save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_App2;
     private javax.swing.JLabel jLabel_Close2;
-    private javax.swing.JLabel jLabel_Minimize2;
+    private javax.swing.JLabel jLabel_home;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -588,8 +658,6 @@ public class edit_test extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField_TestName;
-    private javax.swing.JTextField jTextField_Topic;
     // End of variables declaration//GEN-END:variables
 
     private void setlocaltionRelativeTo(Object object) {

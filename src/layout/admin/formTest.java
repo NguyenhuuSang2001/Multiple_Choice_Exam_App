@@ -4,7 +4,16 @@
  */
 package layout.admin;
 
+import dao.ItestDetail;
+import dao.impl.ItestDetailImpl;
 import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import layout.edit_test;
+import layout.user.user1;
+import pojo.TestDetail;
 
 /**
  *
@@ -15,8 +24,55 @@ public class formTest extends javax.swing.JPanel {
     /**
      * Creates new form formTest
      */
-    public formTest() {
+    private int k;
+    private String nameTe;
+    private String topic;
+    private String datecr;
+    private int number;
+    public int getK() {
+        return k;
+    }
+
+    public void setK(int k) {
+        this.k = k;
+    }
+
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getNameTe() {
+        return nameTe;
+    }
+
+    public void setNameTe(String nameTe) {
+        this.nameTe = nameTe;
+    }
+
+    public String getDatecr() {
+        return datecr;
+    }
+
+    public void setDatecr(String datecr) {
+        this.datecr = datecr;
+    }
+    
+    
+
+    
+    
+    
+    
+    public formTest(int k) {
+        this.k = k;
+        
         initComponents();
+        //jLabel15.setText("hi "+k);
     }
 
     /**
@@ -78,14 +134,22 @@ public class formTest extends javax.swing.JPanel {
                 editMouseMoved(evt);
             }
         });
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("4 Question");
 
-        publish.setBackground(new java.awt.Color(0, 255, 255));
+        publish.setBackground(new java.awt.Color(0, 204, 204));
+        publish.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        publish.setForeground(new java.awt.Color(255, 255, 255));
         publish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/padlock-3-24.png"))); // NOI18N
         publish.setText("Private");
+        publish.setOpaque(true);
         publish.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 publishMouseMoved(evt);
@@ -155,6 +219,11 @@ public class formTest extends javax.swing.JPanel {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
+        List<TestDetail> list = new ArrayList<>();
+        ItestDetail itesst = new ItestDetailImpl();
+        list = itesst.getByTestId(k);
+        user1 user = new user1(k,nameTe,topic,list);
+        user.show();
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void publishMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishMouseMoved
@@ -163,8 +232,25 @@ public class formTest extends javax.swing.JPanel {
 
     private void editMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseMoved
         // TODO add your handling code here:
-        jLabel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        edit.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_editMouseMoved
+
+    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
+        // TODO add your handling code here:
+         //disable();
+       
+         edit_test ed = null;
+        try {
+            ed = new edit_test(k,nameTe,topic,datecr);
+            //System.out.println("test: "+k);
+            ed.show();
+           
+        } catch (Exception ex) {
+            Logger.getLogger(formTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         ed.show();
+       
+    }//GEN-LAST:event_editMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

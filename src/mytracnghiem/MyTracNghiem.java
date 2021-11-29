@@ -25,6 +25,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import org.eclipse.persistence.jpa.jpql.tools.model.IPropertyChangeEvent;
 import pojo.Answer;
 import pojo.History;
@@ -42,8 +43,26 @@ public class MyTracNghiem {
     /**
      * @param args the command line arguments
      */
+    public static ArrayList<Integer> swap(int n){
+        ArrayList<Integer> list = new ArrayList<>();
+        int upper = n;
+        for(int i=0; i<n; ++i){
+            list.add(i);
+        }
+
+        ArrayList<Integer> result = new ArrayList();
+        Random random = new Random();
+        for (int i=0; i<n; ++i){
+            int ind = random.nextInt(upper);
+            result.add(list.get(ind));
+            list.remove(ind);
+            --upper;
+        }
+
+        return result;
+    }
     public static void main(String[] args) {
-        IQuestion iq = new IQuestionImpl();
+       // IQuestion iq = new IQuestionImpl();
        // Optional<Question> p = iq.getQuestionById(1);
       //  System.out.println(p.get());
        /* IHistory i = new IHistoryImpl();
@@ -64,11 +83,34 @@ public class MyTracNghiem {
       }*/
    // int k =iq.saveQuestion(3,"Toán", "3+4");
      //   System.out.println(k);
-     IQuestion q = new IQuestionImpl();
-     IAnswer a= new IAnswerImpl();
+    // IQuestion q = new IQuestionImpl();
+     //IAnswer a= new IAnswerImpl();
   //   boolean k = a.deleteByQID(3);
   //   boolean t = q.deleteQuestionByID(3);
     // System.out.println(k+" "+t);
        // System.out.println("k".equals("k"));
+      // ItestDetail i = new ItestDetailImpl();
+      //  boolean dg = i.saveQuestionInTest(1, 2);
+      //  System.out.println(dg);
+       // Optional<Question> y = iq.getQuestionById(2);
+       // Question u = y.orElseThrow();
+        //System.out.println(u.getContent());
+       // Random random = new Random();
+      
+    /*    for(int i=3;i>=0;i--){
+            int k = random.nextInt(i);
+            System.out.println(k);
+        }*/
+   // 1-10 random
+  // ArrayList<Integer> listsss = swap(3);
+   
+      ArrayList<Integer> list = new ArrayList<>();
+     list = swap(3);
+     for(Integer i:list){
+         System.out.println(i);
+     }
+       
 }
+
+    
 }
