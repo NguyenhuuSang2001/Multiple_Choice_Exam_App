@@ -32,5 +32,9 @@ public class PointOfTest {
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
+
+    public PointOfTest() {
+    }
+    
     
 }

@@ -4,20 +4,37 @@
  */
 package layout.user;
 
+import com.laptrinhjavaweb.dao.IUserDAO;
 import dao.IAnswer;
+import dao.IInfortest;
 import dao.IQuestion;
+import dao.ItestDetail;
 import dao.impl.IAnswerImpl;
 import dao.impl.IQuestionImpl;
+import dao.impl.IinfortestImpl;
+import dao.impl.ItestDetailImpl;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import layout.admin.admin1;
+import layout.admin.formTest;
+import layout.login;
 import pojo.Answer;
+import pojo.InforTest;
 import pojo.PointOfTest;
 import pojo.Question;
 import pojo.TestDetail;
@@ -34,16 +51,22 @@ public class user1 extends javax.swing.JFrame {
     private int idTest;
     private String nameTest;
     private String topicName;
+    private int numberTest;
     private List<TestDetail> listTest;
-    private List<Question> listQuestion;
-    private List<PointOfTest> listPointOfTests;
-    public user1(int idTest,String nameTest,String topicNam,List<TestDetail> listTest) {
+    private int k;
+    private List<Question> listQuestion = new ArrayList<>();
+    private List<PointOfTest> listPointOfTests = new ArrayList<>();
+    private List<Answer> listAnswers1 = new ArrayList<>();
+    private List<Map<JRadioButton,Boolean>> listda = new ArrayList<>();
+    private Map<JRadioButton,Boolean> map;
+    public user1(int idTest,String nameTest,String topicNam,List<TestDetail> listTest,int numberTest) {
         this.listTest = listTest;
         this.idTest = idTest;
         this.nameTest = nameTest;
-        this.topicName = topicName;
+        this.topicName = topicNam;
+        this.numberTest = numberTest;
         IQuestion iQuestion = new IQuestionImpl();
-    //    this.listQuestion = iQuestion.getQuestionById();
+        
         if(listTest.size()>0){
             for(TestDetail t:listTest){
                 Optional<Question> q = iQuestion.getQuestionById(t.getQuestionId());
@@ -51,33 +74,19 @@ public class user1 extends javax.swing.JFrame {
                 this.listQuestion.add(question);
             }
         }
-        showQ();
+        for(Question q:listQuestion){
+        IAnswer iAnswer = new IAnswerImpl();
+        listAnswers1 = iAnswer.getListAnswerByQId(listQuestion.get(0).getId());
+        load();
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    public void showQ(){
-        QContent.setText(listQuestion.get(0).getContent());
-        List<Answer> listAnswers = new ArrayList<>();
-        IAnswer iAnswer = new IAnswerImpl();
-        listAnswers = iAnswer.getListAnswerByQId(listQuestion.get(0).getId());
-        ArrayList<Integer> listRandom = swap(3);
-        Map<JRadioButton,Boolean> map = new HashMap<JRadioButton, Boolean>();
-        int k = 1;
-       // JRadioButton
-        answer1.setText(listAnswers.get(listRandom.get(0)).getContent());
-        map.put(answer1, listAnswers.get(listRandom.get(0)).isIsCorrect());
-        answer2.setText(listAnswers.get(listRandom.get(1)).getContent());
-        map.put(answer2, listAnswers.get(listRandom.get(1)).isIsCorrect());
-        answer3.setText(listAnswers.get(listRandom.get(2)).getContent());
-        map.put(answer2, listAnswers.get(listRandom.get(2)).isIsCorrect());
-        answer4.setText(listAnswers.get(listRandom.get(3)).getContent());
-        map.put(answer4, listAnswers.get(listRandom.get(3)).isIsCorrect());
-    
-    }
-    public user1() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
     }
 
+    public user1() {
+    }
+    
     public int getIdTest() {
         return idTest;
     }
@@ -102,25 +111,38 @@ public class user1 extends javax.swing.JFrame {
         this.topicName = topicName;
     }
     
-     public ArrayList<Integer> swap(int n){
-        ArrayList<Integer> list = new ArrayList<>();
-        int upper = n;
-        for(int i=0; i<n; ++i){
-            list.add(i);
+    public PointOfTest getByQid(int k,JRadioButton answer1,JRadioButton answer2,JRadioButton answer3,JRadioButton answer4){
+        PointOfTest pointOfTest = new PointOfTest();
+        boolean ch1 = answer1.isSelected();
+        boolean ch2 = answer2.isSelected();
+        boolean ch3 = answer3.isSelected();
+         boolean ch4 = answer4.isSelected();
+         if(!ch1&&!ch2&&!ch3&&!ch4){
+             pointOfTest.setChoose(false);
+             pointOfTest.setCorrect(false);
+         }else{
+             pointOfTest.setChoose(true);
+           if(listda.get(k).get(answer1)&&ch1){
+               pointOfTest.setCorrect(true);
+           }else if(listda.get(k).get(answer2)&&ch2){
+               pointOfTest.setCorrect(true);
+           }else if(listda.get(k).get(answer3)&&ch3)
+           {
+               pointOfTest.setCorrect(true);
+           }else if(listda.get(k).get(answer4)&&ch4){
+               pointOfTest.setCorrect(true);
+           }else{
+               pointOfTest.setCorrect(false);
+           }
         }
-
-        ArrayList<Integer> result = new ArrayList();
-        Random random = new Random();
-        for (int i=0; i<n; ++i){
-            int ind = random.nextInt(upper);
-            result.add(list.get(ind));
-            list.remove(ind);
-            --upper;
-        }
-
-        return result;
+        return pointOfTest;
     }
-    
+    public void load(){
+         
+//        content.setVisible(false);
+        
+        content.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,14 +163,10 @@ public class user1 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        QName = new javax.swing.JLabel();
-        QContent = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        answer2 = new javax.swing.JRadioButton();
-        answer3 = new javax.swing.JRadioButton();
-        answer4 = new javax.swing.JRadioButton();
-        answer1 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -241,20 +259,15 @@ public class user1 extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        QName.setBackground(new java.awt.Color(255, 255, 255));
-        QName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        QName.setForeground(new java.awt.Color(0, 0, 0));
-        QName.setText("Question 1: ");
-
-        QContent.setBackground(new java.awt.Color(255, 255, 255));
-        QContent.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        QContent.setForeground(new java.awt.Color(0, 0, 0));
-        QContent.setText("4+2 ");
-
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow-94-24.png"))); // NOI18N
         jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel12MouseMoved(evt);
+            }
+        });
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
             }
         });
 
@@ -270,17 +283,26 @@ public class user1 extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(answer2);
-        answer2.setText("jRadioButton1");
+        jButton1.setBackground(new java.awt.Color(0, 255, 255));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Submit");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
-        buttonGroup1.add(answer3);
-        answer3.setText("jRadioButton2");
-
-        buttonGroup1.add(answer4);
-        answer4.setText("jRadioButton3");
-
-        buttonGroup1.add(answer1);
-        answer1.setText("jRadioButton4");
+        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
+        content.setLayout(contentLayout);
+        contentLayout.setHorizontalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        contentLayout.setVerticalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 223, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -288,46 +310,25 @@ public class user1 extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(QName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(QContent, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 137, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)))
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(218, 218, 218)
+                .addComponent(jLabel13)
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(answer1)
-                    .addComponent(answer2)
-                    .addComponent(answer3)
-                    .addComponent(answer4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(QName)
-                    .addComponent(QContent))
-                .addGap(26, 26, 26)
-                .addComponent(answer1)
-                .addGap(18, 18, 18)
-                .addComponent(answer2)
-                .addGap(18, 18, 18)
-                .addComponent(answer3)
-                .addGap(18, 18, 18)
-                .addComponent(answer4)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12)
+                        .addComponent(jLabel13))
+                    .addComponent(jButton1))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -344,7 +345,7 @@ public class user1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(384, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,6 +399,29 @@ public class user1 extends javax.swing.JFrame {
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
+        //QContent.setText("hi");
+      //  System.out.println("truoc" + k);
+      //  System.out.println(listQuestion.size());
+  /*    jLabel5.setText(this.nameTest);
+      jLabel4.setText(this.topicName);
+        if(k < (listQuestion.size()-1)){
+        //QName.setText("Question "+(k+1)":");
+        List<Answer> listAnswers = new ArrayList<>();
+        IAnswer iAnswer = new IAnswerImpl();
+        listAnswers = iAnswer.getListAnswerByQId(listQuestion.get(k+1).getId());
+      
+       // if(k+1)
+        k++;
+        
+        
+            //System.out.println("sau "+k);
+        }else{
+            JOptionPane.showMessageDialog(this,
+    "Đã là câu hỏi cuối cùng!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+        }*/
+        
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel13MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseMoved
@@ -416,6 +440,69 @@ public class user1 extends javax.swing.JFrame {
         this.dispose();
         am.show();
     }//GEN-LAST:event_jLabel_homeMouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+        //System.out.println(nameTest);
+   /*     jLabel5.setText(this.nameTest);
+        jLabel4.setText(this.topicName);
+       // System.out.println(k);
+          if(k >0){
+        List<Answer> listAnswers = new ArrayList<>();
+        IAnswer iAnswer = new IAnswerImpl();
+        listAnswers = iAnswer.getListAnswerByQId(listQuestion.get(k-1).getId());
+        ArrayList<Integer> listRandom = swap(4);
+        //Map<JRadioButton,Boolean> maps = new HashMap<JRadioButton, Boolean>();
+        QContent.setText(listQuestion.get(k-1).getContent());
+       // JRadioButton
+        
+        answer1.setText(listAnswers.get(listRandom.get(0)).getContent());
+    //    maps.put(answer1, listAnswers.get(listRandom.get(0)).isIsCorrect());
+        answer2.setText(listAnswers.get(listRandom.get(1)).getContent());
+      //  maps.put(answer2, listAnswers.get(listRandom.get(1)).isIsCorrect());
+        answer3.setText(listAnswers.get(listRandom.get(2)).getContent());
+     //   maps.put(answer2, listAnswers.get(listRandom.get(2)).isIsCorrect());
+        answer4.setText(listAnswers.get(listRandom.get(3)).getContent());
+     //   maps.put(answer4, listAnswers.get(listRandom.get(3)).isIsCorrect());
+        //listda.add(maps);
+        k--;
+        PointOfTest p = getByQid(k);
+        listPointOfTests.set(k,p);
+        }else{
+            JOptionPane.showMessageDialog(this,
+    "Đây là câu hỏi đầu tiên!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+        }*/
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+       boolean checkDone = true;
+       for(PointOfTest p:listPointOfTests){
+           if(!p.isChoose()){
+               checkDone = false;
+           }
+           System.out.println(p.isChoose());
+       }
+       if(checkDone){
+           int point = 0;
+           
+           for(PointOfTest p:listPointOfTests){
+               
+               if(p.isCorrect()){
+                   point++;
+               }
+           }
+           ResultTest resultTest = new ResultTest();
+           resultTest.show();
+       }else{
+            JOptionPane.showMessageDialog(this,
+    "Có câu chưa được chọn!",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -453,13 +540,9 @@ public class user1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel QContent;
-    private javax.swing.JLabel QName;
-    private javax.swing.JRadioButton answer1;
-    private javax.swing.JRadioButton answer2;
-    private javax.swing.JRadioButton answer3;
-    private javax.swing.JRadioButton answer4;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel content;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

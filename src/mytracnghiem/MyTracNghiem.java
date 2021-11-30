@@ -23,6 +23,7 @@ import pojo.Users;
 import responsity.ConnectionManager;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -89,7 +90,7 @@ public class MyTracNghiem {
   //   boolean t = q.deleteQuestionByID(3);
     // System.out.println(k+" "+t);
        // System.out.println("k".equals("k"));
-      // ItestDetail i = new ItestDetailImpl();
+      ItestDetail i = new ItestDetailImpl();
       //  boolean dg = i.saveQuestionInTest(1, 2);
       //  System.out.println(dg);
        // Optional<Question> y = iq.getQuestionById(2);
@@ -102,15 +103,15 @@ public class MyTracNghiem {
             System.out.println(k);
         }*/
    // 1-10 random
-  // ArrayList<Integer> listsss = swap(3);
-   
-      ArrayList<Integer> list = new ArrayList<>();
-     list = swap(3);
-     for(Integer i:list){
-         System.out.println(i);
-     }
+    ArrayList<Integer> listsssss = swap(4);
+        System.out.println(listsssss.get(0));
+         System.out.println(listsssss.get(1));
+          System.out.println(listsssss.get(2));
+           System.out.println(listsssss.get(3));
+    // listsss.forEach(i->System.out.println(i));
+        } // System.out.println(i.countQuestionInTest(1));
        
 }
 
     
-}
+

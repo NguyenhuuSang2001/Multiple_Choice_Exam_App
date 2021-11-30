@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import layout.edit_test;
 import layout.user.user1;
 import pojo.TestDetail;
@@ -29,6 +30,7 @@ public class formTest extends javax.swing.JPanel {
     private String topic;
     private String datecr;
     private int number;
+
     public int getK() {
         return k;
     }
@@ -36,7 +38,6 @@ public class formTest extends javax.swing.JPanel {
     public void setK(int k) {
         this.k = k;
     }
-
 
     public String getTopic() {
         return topic;
@@ -61,16 +62,12 @@ public class formTest extends javax.swing.JPanel {
     public void setDatecr(String datecr) {
         this.datecr = datecr;
     }
-    
-    
 
-    
-    
-    
-    
-    public formTest(int k) {
+    public formTest(int k, int number, String nameTest, String topic) {
         this.k = k;
-        
+        this.nameTe = nameTest;
+        this.topic = topic;
+        this.number = number;
         initComponents();
         //jLabel15.setText("hi "+k);
     }
@@ -91,7 +88,7 @@ public class formTest extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         edit = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        nubjtext = new javax.swing.JLabel();
         publish = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -140,9 +137,9 @@ public class formTest extends javax.swing.JPanel {
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("4 Question");
+        nubjtext.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nubjtext.setForeground(new java.awt.Color(255, 255, 255));
+        nubjtext.setText("4 Question");
 
         publish.setBackground(new java.awt.Color(0, 204, 204));
         publish.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -166,7 +163,7 @@ public class formTest extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addComponent(name)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jLabel15))
+                        .addComponent(nubjtext))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTopic)
@@ -186,7 +183,7 @@ public class formTest extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name)
-                    .addComponent(jLabel15))
+                    .addComponent(nubjtext))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTopic)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,11 +216,19 @@ public class formTest extends javax.swing.JPanel {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-        List<TestDetail> list = new ArrayList<>();
-        ItestDetail itesst = new ItestDetailImpl();
-        list = itesst.getByTestId(k);
-        user1 user = new user1(k,nameTe,topic,list);
-        user.show();
+        if (this.number > 0) {
+            List<TestDetail> list = new ArrayList<>();
+            ItestDetail itesst = new ItestDetailImpl();
+            list = itesst.getByTestId(k);
+            user1 user = new user1(k, nameTe, topic, list, number);
+            user.setVisible(true);
+            //user.show();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Không có câu hỏi nào để làm!",
+                    "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void publishMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishMouseMoved
@@ -237,19 +242,19 @@ public class formTest extends javax.swing.JPanel {
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
         // TODO add your handling code here:
-         //disable();
-       
-         edit_test ed = null;
+        //disable();
+
+        edit_test ed = null;
         try {
-            ed = new edit_test(k,nameTe,topic,datecr);
+            ed = new edit_test(k, nameTe, topic, datecr);
             //System.out.println("test: "+k);
             ed.show();
-           
+
         } catch (Exception ex) {
             Logger.getLogger(formTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-         ed.show();
-       
+        ed.show();
+
     }//GEN-LAST:event_editMouseClicked
 
 
@@ -258,10 +263,10 @@ public class formTest extends javax.swing.JPanel {
     public static javax.swing.JLabel edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel15;
     protected static javax.swing.JLabel jLabelTopic;
     private javax.swing.JPanel jPanel5;
     protected static javax.swing.JLabel name;
+    protected static javax.swing.JLabel nubjtext;
     public static javax.swing.JLabel publish;
     // End of variables declaration//GEN-END:variables
 }

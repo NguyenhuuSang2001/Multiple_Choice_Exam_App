@@ -5,7 +5,9 @@
 package layout.admin;
 
 import dao.IInfortest;
+import dao.ItestDetail;
 import dao.impl.IinfortestImpl;
+import dao.impl.ItestDetailImpl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -55,12 +57,15 @@ public class admin1 extends javax.swing.JFrame {
         List<InforTest> list2 = new ArrayList<>();//chua tk test khac publish
         list1 = in4.getListByUserId(login.userID);
         list2 = in4.getListOutOfUserId(login.userID);
-        int h_test=0 , n_test = 11;
+        int h_test=0 ,n_test =11;
         for(int i=0; i<list1.size(); i++) {
-            formTest a_test = new formTest(list1.get(i).getId());
+            ItestDetail itestDetail = new ItestDetailImpl();
+            int number =itestDetail.countQuestionInTest(list1.get(i).getId());
+            formTest a_test = new formTest(list1.get(i).getId(),number,list1.get(i).getName(),list1.get(i).getTopic());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list1.get(i).getName());
             a_test.jLabelTopic.setText(list1.get(i).getTopic());
+            a_test.nubjtext.setText(Integer.toString(number)+" Question");
             DateFormat d = new SimpleDateFormat();
             a_test.date.setText(d.format(list1.get(i).getDateCreate()));
             if(list1.get(i).isPublish()){
@@ -75,13 +80,15 @@ public class admin1 extends javax.swing.JFrame {
             h_test = a_test.getHeight();
         }
        for(int i=0; i<list2.size(); i++) {
-            formTest a_test = new formTest(list2.get(i).getId());
+            ItestDetail itestDetail = new ItestDetailImpl();
+            int number =itestDetail.countQuestionInTest(list2.get(i).getId());
+            formTest a_test = new formTest(list2.get(i).getId(),number,list2.get(i).getName(),list2.get(i).getTopic());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list2.get(i).getName());
             a_test.jLabelTopic.setText(list2.get(i).getTopic());
             DateFormat d = new SimpleDateFormat();
             a_test.date.setText(d.format(list2.get(i).getDateCreate()));
-           
+            a_test.nubjtext.setText(Integer.toString(number)+" Question");
             a_test.publish.setText("Publish");
             a_test.edit.show(false);
             box.add(a_test);

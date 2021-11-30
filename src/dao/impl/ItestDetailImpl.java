@@ -8,6 +8,7 @@ import Respository.TestDetailRepository;
 import Respository.impl.TestDetailRepositoryImpl;
 import com.news.orm.impl.BaseResponsity;
 import dao.ItestDetail;
+import exception.OrmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -91,6 +92,26 @@ public class ItestDetailImpl implements ItestDetail{
            } 
              //To change body of generated methods, choose Tools | Templates.
              return false;
+    }
+
+    @Override
+    public int countQuestionInTest(int testID) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConnectionManager conn = new ConnectionManager();
+        try (Connection connection = conn.getConnection()) {
+            String sql = "SELECT COUNT(1) as total FROM `testdetail` where TestID = "+testID;
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+           if(rs.next()){
+               return rs.getInt("total");
+           }
+           connection.close();
+           return 0;
+        } catch (SQLException exception) {
+            throw new OrmException(exception.getMessage());
+        } //To change 
     }
     
 }
