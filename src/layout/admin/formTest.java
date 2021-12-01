@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import layout.edit_test;
 import layout.user.admin1;
-import layout.user.user1;
 import pojo.TestDetail;
 
 /**
@@ -94,7 +93,7 @@ public class formTest extends javax.swing.JPanel {
 
         jLabel1.setText("jLabel1");
 
-        jPanel5.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel5.setBackground(new java.awt.Color(0, 204, 255));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         name.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -142,7 +141,7 @@ public class formTest extends javax.swing.JPanel {
         nubjtext.setForeground(new java.awt.Color(255, 255, 255));
         nubjtext.setText("4 Question");
 
-        publish.setBackground(new java.awt.Color(0, 204, 204));
+        publish.setBackground(new java.awt.Color(0, 204, 255));
         publish.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         publish.setForeground(new java.awt.Color(255, 255, 255));
         publish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/padlock-3-24.png"))); // NOI18N

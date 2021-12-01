@@ -82,7 +82,7 @@ public class admin4 extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 255));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -144,7 +144,6 @@ public class admin4 extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("History");
 
         jLabel3.setBackground(new java.awt.Color(51, 255, 255));
@@ -160,10 +159,8 @@ public class admin4 extends javax.swing.JFrame {
             }
         });
 
-        tabel.setBackground(new java.awt.Color(255, 255, 255));
         tabel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 255, 255))); // NOI18N
         tabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        tabel.setForeground(new java.awt.Color(0, 0, 0));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

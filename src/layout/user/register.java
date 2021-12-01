@@ -7,12 +7,14 @@ package layout.user;
 import com.laptrinhjavaweb.dao.IUserDAO;
 import dao.impl.UserDao;
 import java.awt.Color;
+import java.awt.Cursor;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import pojo.Users;
 import layout.login;
+
 /**
  *
  * @author Asus
@@ -38,8 +40,8 @@ public class register extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_App1 = new javax.swing.JLabel();
-        jLabel_Close1 = new javax.swing.JLabel();
         jLabel_Minimize1 = new javax.swing.JLabel();
+        jLabel_close = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel_Title = new javax.swing.JLabel();
         jTextField_Username = new javax.swing.JTextField();
@@ -47,9 +49,6 @@ public class register extends javax.swing.JFrame {
         jButton_Register = new javax.swing.JButton();
         jButton_Cancel = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(550, 175));
@@ -62,23 +61,6 @@ public class register extends javax.swing.JFrame {
         jLabel_App1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_App1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_App1.setText("Quizz App");
-
-        jLabel_Close1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Close1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Close1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Close1.setText("X");
-        jLabel_Close1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255)));
-        jLabel_Close1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_Close1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel_Close1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel_Close1MouseExited(evt);
-            }
-        });
 
         jLabel_Minimize1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Minimize1.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,6 +79,20 @@ public class register extends javax.swing.JFrame {
             }
         });
 
+        jLabel_close.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/x.png"))); // NOI18N
+        jLabel_close.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel_closeMouseMoved(evt);
+            }
+        });
+        jLabel_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_closeMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -104,10 +100,10 @@ public class register extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_App1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(jLabel_Minimize1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_Close1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -117,23 +113,23 @@ public class register extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_App1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Close1)
-                            .addComponent(jLabel_Minimize1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addComponent(jLabel_Minimize1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel_Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel_Title.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel_Title.setForeground(new java.awt.Color(51, 102, 255));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Title.setText("REGISTER");
+        jLabel_Title.setText("Đăng ký");
 
-        jTextField_Username.setBackground(new java.awt.Color(255, 255, 255));
         jTextField_Username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField_Username.setText("Tên đăng nhập");
+        jTextField_Username.setToolTipText("Nhập tên đăng nhập");
         jTextField_Username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_UsernameFocusGained(evt);
@@ -153,9 +149,11 @@ public class register extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPasswordField.setForeground(new java.awt.Color(153, 153, 153));
+        jPasswordField.setText("Mật khẩu");
+        jPasswordField.setToolTipText("Nhập mật khẩu");
+        jPasswordField.setEchoChar((char)0);
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordFieldFocusGained(evt);
@@ -169,8 +167,16 @@ public class register extends javax.swing.JFrame {
                 jPasswordFieldActionPerformed(evt);
             }
         });
+        jPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordFieldKeyTyped(evt);
+            }
+        });
 
-        jButton_Register.setBackground(new java.awt.Color(0, 153, 255));
+        jButton_Register.setBackground(new java.awt.Color(102, 204, 255));
         jButton_Register.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_Register.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Register.setText("Register");
@@ -189,12 +195,15 @@ public class register extends javax.swing.JFrame {
             }
         });
 
-        jButton_Cancel.setBackground(new java.awt.Color(0, 153, 255));
+        jButton_Cancel.setBackground(new java.awt.Color(102, 204, 255));
         jButton_Cancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_Cancel.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Cancel.setText("Cancel");
         jButton_Cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_Cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton_CancelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton_CancelMouseEntered(evt);
             }
@@ -203,9 +212,11 @@ public class register extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(153, 153, 153));
+        jPasswordField1.setText("Nhập lại mật khẩu");
+        jPasswordField1.setToolTipText("Nhập lại mật khẩu");
+        jPasswordField1.setEchoChar((char)0);
         jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusGained(evt);
@@ -219,24 +230,17 @@ public class register extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-
-        jLabel1.setBackground(new java.awt.Color(0, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Username:");
-        jLabel1.setOpaque(true);
-
-        jLabel2.setBackground(new java.awt.Color(0, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Password:");
-        jLabel2.setOpaque(true);
-
-        jLabel3.setBackground(new java.awt.Color(0, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Confirm Password:");
-        jLabel3.setOpaque(true);
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -244,43 +248,32 @@ public class register extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel_Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(79, 79, 79)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPasswordField)
-                    .addComponent(jPasswordField1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton_Register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                        .addComponent(jButton_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(jButton_Register, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1)
+                    .addComponent(jPasswordField)
                     .addComponent(jTextField_Username))
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addComponent(jTextField_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cancel))
-                .addGap(49, 49, 49))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -288,14 +281,17 @@ public class register extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -312,23 +308,6 @@ public class register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel_Close1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Close1MouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jLabel_Close1MouseClicked
-
-    private void jLabel_Close1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Close1MouseEntered
-        // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(1,1,1,1, Color.white);
-        jLabel_Close1.setBorder(label_border);
-    }//GEN-LAST:event_jLabel_Close1MouseEntered
-
-    private void jLabel_Close1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Close1MouseExited
-        // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(0,0,0,0, Color.black);
-        jLabel_Close1.setBorder(label_border);
-    }//GEN-LAST:event_jLabel_Close1MouseExited
-
     private void jLabel_Minimize1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize1MouseClicked
         // TODO add your handling code here:
         this.setState(JFrame.ICONIFIED);
@@ -336,35 +315,35 @@ public class register extends javax.swing.JFrame {
 
     private void jLabel_Minimize1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize1MouseEntered
         // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(1,1,1,1, Color.white);
+        Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
         jLabel_Minimize1.setBorder(label_border);
     }//GEN-LAST:event_jLabel_Minimize1MouseEntered
 
     private void jLabel_Minimize1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Minimize1MouseExited
         // TODO add your handling code here:
-        Border label_border = BorderFactory.createMatteBorder(0,0,0,0, Color.black);
+        Border label_border = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black);
         jLabel_Minimize1.setBorder(label_border);
     }//GEN-LAST:event_jLabel_Minimize1MouseExited
 
     private void jTextField_UsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusGained
         // TODO add your handling code here:
         //clear the textfield on focus if the text is "Username"
-        if(jTextField_Username.getText().trim().toLowerCase().equals("username")){
-            jTextField_Username.setText("");
-            jTextField_Username.setForeground(Color.black);
+        if (jTextField_Username.getText().trim().toLowerCase().equals("")) {
+            jTextField_Username.setText("Tên đăng nhập");
+            jTextField_Username.setForeground(new Color(153, 153, 153));
             //            Border jTextField_border = BorderFactory.createMatteBorder(0,0,1,0, Color.black);
             //            jTextField_Username.setBorder(jTextField_border);
         }
+        jTextField_Username.selectAll();
 
     }//GEN-LAST:event_jTextField_UsernameFocusGained
 
     private void jTextField_UsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusLost
         // TODO add your handling code here:
         //if the text field is equal to username or empty
-        if(jTextField_Username.getText().trim().equals("") ||
-            jTextField_Username.getText().trim().toLowerCase().equals("username")){
-            jTextField_Username.setText("username");
-            jTextField_Username.setForeground(new Color(153,153,153));
+        if (jTextField_Username.getText().trim().equals("")) {
+            jTextField_Username.setText("Tên đăng nhập");
+            jTextField_Username.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField_UsernameFocusLost
 
@@ -381,11 +360,14 @@ public class register extends javax.swing.JFrame {
         //clear the passfield on focus if the text is "password"
         //get the password text
         String pass = String.valueOf(jPasswordField.getPassword());
-
-        if(pass.trim().toLowerCase().equals("password")){
-            jPasswordField.setText("");
-            jPasswordField.setForeground(Color.black);
+        if (pass.trim().equals("") || pass.trim().compareToIgnoreCase("Mật khẩu")==0) {
+            jPasswordField.setEchoChar((char) 0);
+            jPasswordField.setText("Mật khẩu");
+            jPasswordField.setForeground(new Color(153, 153, 153));
+        } else {
+            jPasswordField.setEchoChar('*');
         }
+        jPasswordField.selectAll();
     }//GEN-LAST:event_jPasswordFieldFocusGained
 
     private void jPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldFocusLost
@@ -393,10 +375,12 @@ public class register extends javax.swing.JFrame {
         //if the password field is equal to password or empty
         String pass = String.valueOf(jPasswordField.getPassword());
 
-        if(pass.trim().equals("") ||
-            pass.trim().toLowerCase().equals("password")){
-            jPasswordField.setText("password");
-            jPasswordField.setForeground(new Color(153,153,153));
+        if (pass.trim().equals("") || pass.trim().compareToIgnoreCase("Mật khẩu")==0) {
+            jPasswordField.setEchoChar((char) 0);
+            jPasswordField.setText("Mật khẩu");
+            jPasswordField.setForeground(new Color(153, 153, 153));
+        }else{
+            jPasswordField.setEchoChar('*');
         }
     }//GEN-LAST:event_jPasswordFieldFocusLost
 
@@ -406,22 +390,22 @@ public class register extends javax.swing.JFrame {
 
     private void jButton_RegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMouseEntered
         // TODO add your handling code here:
-        jButton_Register.setBackground(new Color(0,204,255));
+        jButton_Register.setBackground(new Color(0, 204, 255));
     }//GEN-LAST:event_jButton_RegisterMouseEntered
 
     private void jButton_RegisterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMouseExited
         // TODO add your handling code here:
-        jButton_Register.setBackground(new Color(0,135,255));
+        jButton_Register.setBackground(new Color(0, 135, 255));
     }//GEN-LAST:event_jButton_RegisterMouseExited
 
     private void jButton_CancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CancelMouseEntered
         // TODO add your handling code here:
-        jButton_Cancel.setBackground(new Color(0,204,255));
+        jButton_Cancel.setBackground(new Color(0, 204, 255));
     }//GEN-LAST:event_jButton_CancelMouseEntered
 
     private void jButton_CancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CancelMouseExited
         // TODO add your handling code here:
-        jButton_Cancel.setBackground(new Color(0,135,255));
+        jButton_Cancel.setBackground(new Color(0, 135, 255));
     }//GEN-LAST:event_jButton_CancelMouseExited
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -432,20 +416,26 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
         String pass = String.valueOf(jPasswordField1.getPassword());
 
-        if(pass.trim().toLowerCase().equals("password")){
-            jPasswordField1.setText("");
-            jPasswordField1.setForeground(Color.black);
+        if (pass.trim().equals("") || pass.trim().compareToIgnoreCase("Nhập lại mật khẩu")==0) {
+            jPasswordField1.setEchoChar((char) 0);
+            jPasswordField1.setText("Nhập lại mật khẩu");
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        } else {
+            jPasswordField1.setEchoChar('*');
         }
+        jPasswordField1.selectAll();
     }//GEN-LAST:event_jPasswordField1FocusGained
 
     private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
         // TODO add your handling code here:
         String pass = String.valueOf(jPasswordField1.getPassword());
 
-        if(pass.trim().equals("") ||
-            pass.trim().toLowerCase().equals("password")){
-            jPasswordField1.setText("password");
-            jPasswordField1.setForeground(new Color(153,153,153));
+        if (pass.trim().equals("") || pass.trim().compareToIgnoreCase("Nhập lại mật khẩu")==0) {
+            jPasswordField1.setEchoChar((char) 0);
+            jPasswordField1.setText("Nhập lại mật khẩu");
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        }else{
+            jPasswordField1.setEchoChar('*');
         }
     }//GEN-LAST:event_jPasswordField1FocusLost
 
@@ -456,32 +446,99 @@ public class register extends javax.swing.JFrame {
         String rePass = String.valueOf(jPasswordField1.getPassword());
         System.out.println(pass);
         System.out.println(rePass);
-        if(!pass.equals(rePass)||userName.equals("")||userName.isEmpty()||pass.isEmpty()||
-                pass.equals("")||rePass.isEmpty()||rePass.equals("")){
-             JOptionPane.showMessageDialog(this,
-    "Lỗi đăng ký",
-    "Error",
-    JOptionPane.ERROR_MESSAGE);
-        }else{
-           IUserDAO us = new UserDao();
-           int k = us.saveAcount(userName, pass);
-           if(k == 0){
-               JOptionPane.showMessageDialog(this,
-    "Tài khoản này đã tồn tại",
-    "Error",
-    JOptionPane.ERROR_MESSAGE);
-           }else{
-               JOptionPane.showMessageDialog(this,
-    "Đăng ký thành công",
-    "Thông báo",
-    JOptionPane.ERROR_MESSAGE);
-            login lg = new login();
-           dispose();
-           lg.show();
-           }
-            
+        if (!pass.equals(rePass) || userName.equals("") || userName.isEmpty() || pass.isEmpty()
+                || pass.equals("") || rePass.isEmpty() || rePass.equals("")) {
+            JOptionPane.showMessageDialog(this,
+                    "Lỗi đăng ký",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            IUserDAO us = new UserDao();
+            int k = us.saveAcount(userName, pass);
+            if (k == 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Tài khoản này đã tồn tại",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Đăng ký thành công",
+                        "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+                login lg = new login();
+                dispose();
+                lg.show();
+            }
+
         }
     }//GEN-LAST:event_jButton_RegisterMouseClicked
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1KeyPressed
+
+    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
+        // TODO add your handling code here:
+        String pass = String.valueOf(jPasswordField.getPassword());
+        String rePass = String.valueOf(jPasswordField1.getPassword());
+        if(pass.equalsIgnoreCase(rePass)){
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        }else{
+            jPasswordField1.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_jPasswordField1KeyReleased
+
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        // TODO add your handling code here:
+        
+        String pass = String.valueOf(jPasswordField.getPassword());
+        String rePass = String.valueOf(jPasswordField1.getPassword()) + String.valueOf(evt.getKeyChar());
+        if(pass.equalsIgnoreCase(rePass)){
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        }else{
+            jPasswordField1.setForeground(Color.red);
+        }
+        
+    }//GEN-LAST:event_jPasswordField1KeyTyped
+
+    private void jPasswordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldKeyReleased
+        String pass = String.valueOf(jPasswordField.getPassword());
+        String rePass = String.valueOf(jPasswordField1.getPassword());
+        if (pass.equalsIgnoreCase(rePass) & pass.equalsIgnoreCase("")) {
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        } else {
+            jPasswordField1.setForeground(Color.red);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldKeyReleased
+
+    private void jPasswordFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldKeyTyped
+        String pass = String.valueOf(jPasswordField.getPassword());
+        String rePass = String.valueOf(jPasswordField1.getPassword()) + String.valueOf(evt.getKeyChar());
+        if (pass.equalsIgnoreCase(rePass)) {
+            jPasswordField1.setForeground(new Color(153, 153, 153));
+        } else {
+            jPasswordField1.setForeground(Color.red);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldKeyTyped
+
+    private void jButton_CancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CancelMouseClicked
+        // TODO add your handling code here:
+        login lg = new login();
+        lg.show();
+        this.dispose();
+
+    }//GEN-LAST:event_jButton_CancelMouseClicked
+
+    private void jLabel_closeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseMoved
+        // TODO add your handling code here:
+        jLabel_close.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel_closeMouseMoved
+
+    private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jLabel_closeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -521,13 +578,10 @@ public class register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Cancel;
     private javax.swing.JButton jButton_Register;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_App1;
-    private javax.swing.JLabel jLabel_Close1;
     private javax.swing.JLabel jLabel_Minimize1;
     private javax.swing.JLabel jLabel_Title;
+    private javax.swing.JLabel jLabel_close;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

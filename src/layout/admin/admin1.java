@@ -162,7 +162,7 @@ public class admin1 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 255));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -227,7 +227,6 @@ public class admin1 extends javax.swing.JFrame {
 
         jtextTen.setBackground(new java.awt.Color(255, 255, 255));
         jtextTen.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtextTen.setForeground(new java.awt.Color(0, 0, 0));
         jtextTen.setText("Hi "+login.us.getName()+"!");
 
         jLabel6.setBackground(new java.awt.Color(0, 255, 255));
@@ -284,7 +283,6 @@ public class admin1 extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setToolTipText("");
         jScrollPane1.setInheritsPopupMenu(true);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(400, 400));

@@ -62,7 +62,7 @@ public class admin2 extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 255));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -124,10 +124,8 @@ public class admin2 extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Create a new test");
 
-        jtextTestName.setBackground(new java.awt.Color(255, 255, 255));
         jtextTestName.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jtextTestName.setAlignmentX(0.0F);
         jtextTestName.setAlignmentY(0.0F);
@@ -135,28 +133,23 @@ public class admin2 extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(204, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Test name");
         jLabel3.setOpaque(true);
 
         jLabel4.setBackground(new java.awt.Color(204, 255, 255));
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Topic");
         jLabel4.setOpaque(true);
 
-        jtextTopic.setBackground(new java.awt.Color(255, 255, 255));
         jtextTopic.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(204, 255, 255));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Publish");
         jLabel5.setOpaque(true);
 
         jButton1.setBackground(new java.awt.Color(153, 255, 255));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Save");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,13 +161,11 @@ public class admin2 extends javax.swing.JFrame {
         rb1.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rb1);
         rb1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        rb1.setForeground(new java.awt.Color(0, 0, 0));
         rb1.setText("Publish");
 
         rb0.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rb0);
         rb0.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        rb0.setForeground(new java.awt.Color(0, 0, 0));
         rb0.setText("Private");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -209,7 +200,7 @@ public class admin2 extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtextTestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -93,7 +93,7 @@ public class admin3 extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 255));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -155,14 +155,11 @@ public class admin3 extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Create A New Question");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Question:  ");
 
-        textQuestion.setBackground(new java.awt.Color(255, 255, 255));
         textQuestion.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         textQuestion.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         textQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -171,45 +168,36 @@ public class admin3 extends javax.swing.JFrame {
             }
         });
 
-        jtextFalseAnswer1.setBackground(new java.awt.Color(255, 255, 255));
         jtextFalseAnswer1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        jtextCorrectAnswer.setBackground(new java.awt.Color(255, 255, 255));
         jtextCorrectAnswer.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        jtextFalseAnswer2.setBackground(new java.awt.Color(255, 255, 255));
         jtextFalseAnswer2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        jtextFalseAnswer3.setBackground(new java.awt.Color(255, 255, 255));
         jtextFalseAnswer3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(204, 255, 255));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Correct answer");
         jLabel5.setOpaque(true);
 
         jLabel6.setBackground(new java.awt.Color(204, 255, 255));
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("False answer");
         jLabel6.setOpaque(true);
 
         jLabel7.setBackground(new java.awt.Color(204, 255, 255));
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("False answer");
         jLabel7.setOpaque(true);
 
         jLabel8.setBackground(new java.awt.Color(204, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("False answer");
         jLabel8.setOpaque(true);
 
         btnAddQ.setBackground(new java.awt.Color(153, 255, 255));
         btnAddQ.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnAddQ.setForeground(new java.awt.Color(0, 0, 0));
         btnAddQ.setText("Add Question");
         btnAddQ.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -217,7 +205,6 @@ public class admin3 extends javax.swing.JFrame {
             }
         });
 
-        tabel.setBackground(new java.awt.Color(255, 255, 255));
         tabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tabel.setForeground(new java.awt.Color(0, 255, 255));
@@ -239,7 +226,7 @@ public class admin3 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel);
 
-        jLabel9.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel9.setBackground(new java.awt.Color(0, 204, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
         jLabel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -257,11 +244,9 @@ public class admin3 extends javax.swing.JFrame {
 
         jLabel10.setBackground(new java.awt.Color(204, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Topic");
         jLabel10.setOpaque(true);
 
-        jtextTopic.setBackground(new java.awt.Color(255, 255, 255));
         jtextTopic.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
