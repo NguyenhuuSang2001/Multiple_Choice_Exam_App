@@ -23,28 +23,30 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 //import static layout.create.test.content;
-import layout.login;
+import layout.user.login;
 import pojo.InforTest;
 
 /**
  *
  * @author PC
  */
-public class admin1 extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame {
 
     /**
      * Creates new form admin1
      */
-    public admin1() {
+    public Home() {
         initComponents();
         //center form
         load_test();
         this.setLocationRelativeTo(null);
         jLabel_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("../../images/x.png")));
+        
     }
 
     public void load_test() {
        
+        
        content.setVisible(false);
 //        content.setBackground(Color.red);
         content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -61,7 +63,7 @@ public class admin1 extends javax.swing.JFrame {
         for(int i=0; i<list1.size(); i++) {
             ItestDetail itestDetail = new ItestDetailImpl();
             int number =itestDetail.countQuestionInTest(list1.get(i).getId());
-            formTest a_test = new formTest(list1.get(i).getId(),number,list1.get(i).getName(),list1.get(i).getTopic());
+            Form_test a_test = new Form_test(list1.get(i).getId(),number,list1.get(i).getName(),list1.get(i).getTopic());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list1.get(i).getName());
             a_test.jLabelTopic.setText(list1.get(i).getTopic());
@@ -82,7 +84,7 @@ public class admin1 extends javax.swing.JFrame {
        for(int i=0; i<list2.size(); i++) {
             ItestDetail itestDetail = new ItestDetailImpl();
             int number =itestDetail.countQuestionInTest(list2.get(i).getId());
-            formTest a_test = new formTest(list2.get(i).getId(),number,list2.get(i).getName(),list2.get(i).getTopic());
+            Form_test a_test = new Form_test(list2.get(i).getId(),number,list2.get(i).getName(),list2.get(i).getTopic());
 //        a_test.setPreferredSize(new Dimension(300, 100));
             a_test.name.setText(list2.get(i).getName());
             a_test.jLabelTopic.setText(list2.get(i).getTopic());
@@ -124,6 +126,7 @@ public class admin1 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
+        account = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -185,6 +188,18 @@ public class admin1 extends javax.swing.JFrame {
             }
         });
 
+        account.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-user-24.png"))); // NOI18N
+        account.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                accountMouseMoved(evt);
+            }
+        });
+        account.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accountMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -193,6 +208,8 @@ public class admin1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(account, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -200,8 +217,10 @@ public class admin1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(account, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -359,11 +378,11 @@ public class admin1 extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-        admin4 st = null;
+        History_view st = null;
         try {
-            st = new admin4();
+            st = new History_view();
         } catch (Exception ex) {
-            Logger.getLogger(admin1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
         st.show();
@@ -391,18 +410,18 @@ public class admin1 extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        admin2 am = new admin2();
+        Create_test am = new Create_test();
         this.dispose();
         am.show();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
-        admin3 am = null;
+        Question_store am = null;
         try {
-            am = new admin3();
+            am = new Question_store();
         } catch (Exception ex) {
-            Logger.getLogger(admin1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
         am.show();
@@ -414,6 +433,18 @@ public class admin1 extends javax.swing.JFrame {
         this.dispose();
         lg.show();
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void accountMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMouseMoved
+        // TODO add your handling code here:
+        account.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_accountMouseMoved
+
+    private void accountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMouseClicked
+        // TODO add your handling code here:
+        Manager_user m_u = new Manager_user();
+        m_u.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_accountMouseClicked
 
     /**
      * @param args the command line arguments
@@ -435,14 +466,30 @@ public class admin1 extends javax.swing.JFrame {
             }
             // jtextTen.setText("hi");
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -463,7 +510,7 @@ public class admin1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                new admin1().setVisible(true);
+                new Home().setVisible(true);
 
             }
         });
@@ -471,6 +518,7 @@ public class admin1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel account;
     private javax.swing.JPanel content;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

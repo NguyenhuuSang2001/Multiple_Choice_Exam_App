@@ -27,14 +27,15 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import layout.admin.formTest;
+import javax.swing.border.Border;
+import layout.admin.Form_test;
 //import static layout.create.test.content;
-import layout.login;
 import pojo.Answer;
 import pojo.InforTest;
 import pojo.PointOfTest;
@@ -45,12 +46,12 @@ import pojo.TestDetail;
  *
  * @author PC
  */
-public class admin1 extends javax.swing.JFrame {
+public class Doing_test extends javax.swing.JFrame {
 
     /**
-     * Creates new form admin1
+     * Creates new form Doing_test
      */
-     private int idTest;
+    private int idTest;
     private String nameTest;
     private String topicName;
     private int numberTest;
@@ -58,13 +59,13 @@ public class admin1 extends javax.swing.JFrame {
     private int k;
     private List<Question> listQuestion = new ArrayList<>();
     private List<PointOfTest> listPointOfTests = new ArrayList<>();
-   // private List<Answer> listAnswers1 = new ArrayList<>();
-    private List<Map<JRadioButton,Boolean>> listda = new ArrayList<>();
+    // private List<Answer> listAnswers1 = new ArrayList<>();
+    private List<Map<JRadioButton, Boolean>> listda = new ArrayList<>();
     private List<List<Answer>> listAnswer;
     private List<formLuaChon> listFormLuaChon = new ArrayList<>();
-    JPanel box ;
-    
-    public admin1(int idTest,String nameTest,String topicNam,List<TestDetail> listTest,int numberTest) {
+    JPanel box;
+
+    public Doing_test(int idTest, String nameTest, String topicNam, List<TestDetail> listTest, int numberTest) {
         this.listTest = listTest;
         this.idTest = idTest;
         this.nameTest = nameTest;
@@ -72,10 +73,10 @@ public class admin1 extends javax.swing.JFrame {
         this.numberTest = numberTest;
         this.listAnswer = new ArrayList<>();
         IQuestion iQuestion = new IQuestionImpl();
-     //   load_question(0);
-        
-        if(listTest.size()>0){
-            for(TestDetail t:listTest){
+        //   load_question(0);
+
+        if (listTest.size() > 0) {
+            for (TestDetail t : listTest) {
                 Optional<Question> q = iQuestion.getQuestionById(t.getQuestionId());
                 Question question = q.orElseThrow();
                 this.listQuestion.add(question);
@@ -84,34 +85,32 @@ public class admin1 extends javax.swing.JFrame {
         initComponents();
         //center form
         content.setVisible(false);
-       content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         box = new JPanel();
-       box.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
-        for(int i = 0;i<numberTest;i++){
+        box.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
+        for (int i = 0; i < numberTest; i++) {
             IAnswer iAnswer = new IAnswerImpl();
             List<Answer> listAnswers1 = iAnswer.getListAnswerByQId(listQuestion.get(i).getId());
-            formLuaChon f =load_test(i, numberTest, this.listQuestion.get(i), listAnswers1);
+            formLuaChon f = load_test(i, numberTest, this.listQuestion.get(i), listAnswers1);
             listFormLuaChon.add(f);
             //listPointOfTests.add(new PointOfTest(false,false));
         }
-        
+
         box.setPreferredSize(new Dimension(100, 100));
         box.setVisible(true);
         JScrollPane jScrollPane = new JScrollPane(box);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-        jScrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight()+250));
+        jScrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight() + 250));
         jScrollPane.setVisible(true);
         content.add(jScrollPane);
         content.setVisible(true);
-       // System.out.println(jScrollPane.getHeight());
+        // System.out.println(jScrollPane.getHeight());
         k = 0;
         this.setLocationRelativeTo(null);
         jLabel_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("../../images/x.png")));
-  
+
     }
 
-    
-    
     public int getIdTest() {
         return idTest;
     }
@@ -135,47 +134,47 @@ public class admin1 extends javax.swing.JFrame {
     public void setTopicName(String topicName) {
         this.topicName = topicName;
     }
-    
-    public PointOfTest getByQid(int k,formLuaChon f){
+
+    public PointOfTest getByQid(int k, formLuaChon f) {
         PointOfTest pointOfTest = new PointOfTest();
         boolean ch1 = f.getAnswer1().isSelected();
         boolean ch2 = f.getAnswer2().isSelected();
         boolean ch3 = f.getAnswer3().isSelected();
-         boolean ch4 = f.getAnswer4().isSelected();
-         if(!ch1&&!ch2&&!ch3&&!ch4){
-             pointOfTest.setChoose(false);
-             pointOfTest.setCorrect(false);
-         }else{
-             pointOfTest.setChoose(true);
-           if(listda.get(k).get(f.getAnswer1())&&ch1){
-               pointOfTest.setCorrect(true);
-           }else if(listda.get(k).get(f.getAnswer2())&&ch2){
-               pointOfTest.setCorrect(true);
-           }else if(listda.get(k).get(f.getAnswer3())&&ch3)
-           {
-               pointOfTest.setCorrect(true);
-           }else if(listda.get(k).get(f.getAnswer4())&&ch4){
-               pointOfTest.setCorrect(true);
-           }else{
-               pointOfTest.setCorrect(false);
-           }
+        boolean ch4 = f.getAnswer4().isSelected();
+        if (!ch1 && !ch2 && !ch3 && !ch4) {
+            pointOfTest.setChoose(false);
+            pointOfTest.setCorrect(false);
+        } else {
+            pointOfTest.setChoose(true);
+            if (listda.get(k).get(f.getAnswer1()) && ch1) {
+                pointOfTest.setCorrect(true);
+            } else if (listda.get(k).get(f.getAnswer2()) && ch2) {
+                pointOfTest.setCorrect(true);
+            } else if (listda.get(k).get(f.getAnswer3()) && ch3) {
+                pointOfTest.setCorrect(true);
+            } else if (listda.get(k).get(f.getAnswer4()) && ch4) {
+                pointOfTest.setCorrect(true);
+            } else {
+                pointOfTest.setCorrect(false);
+            }
         }
         return pointOfTest;
     }
-    public admin1() {
-     
+
+    public Doing_test() {
+
     }
-     
-    public ArrayList<Integer> swap(int n){
+
+    public ArrayList<Integer> swap(int n) {
         ArrayList<Integer> list = new ArrayList<>();
         int upper = n;
-        for(int i=0; i<n; ++i){
+        for (int i = 0; i < n; ++i) {
             list.add(i);
         }
 
         ArrayList<Integer> result = new ArrayList();
         Random random = new Random();
-        for (int i=0; i<n; ++i){
+        for (int i = 0; i < n; ++i) {
             int ind = random.nextInt(upper);
             result.add(list.get(ind));
             list.remove(ind);
@@ -184,8 +183,9 @@ public class admin1 extends javax.swing.JFrame {
 
         return result;
     }
-    public void loadData(formLuaChon fLC,List<Answer> lisst){
-        Map<JRadioButton,Boolean> map = new HashMap<>();
+
+    public void loadData(formLuaChon fLC, List<Answer> lisst) {
+        Map<JRadioButton, Boolean> map = new HashMap<>();
         ArrayList<Integer> listRandom = swap(4);
         map.put(fLC.getAnswer1(), lisst.get(listRandom.get(0)).isIsCorrect());
         fLC.getAnswer1().setText(lisst.get(listRandom.get(0)).getContent());
@@ -194,22 +194,23 @@ public class admin1 extends javax.swing.JFrame {
         map.put(fLC.getAnswer3(), lisst.get(listRandom.get(2)).isIsCorrect());
         fLC.getAnswer3().setText(lisst.get(listRandom.get(2)).getContent());
         map.put(fLC.getAnswer4(), lisst.get(listRandom.get(3)).isIsCorrect());
-       fLC.getAnswer4().setText(lisst.get(listRandom.get(3)).getContent());
-       this.listda.add(map);
-       this.listAnswer.add(lisst);
+        fLC.getAnswer4().setText(lisst.get(listRandom.get(3)).getContent());
+        this.listda.add(map);
+        this.listAnswer.add(lisst);
     }
-    public formLuaChon  load_test(int k, int numberTest, Question question, List<Answer> lisst) {
-       
-      /* content.setVisible(false);
+
+    public formLuaChon load_test(int k, int numberTest, Question question, List<Answer> lisst) {
+
+        /* content.setVisible(false);
        content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         JPanel box = new JPanel();
        box.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));*/
-        formLuaChon fLC = new formLuaChon(k,numberTest,question,lisst);
+        formLuaChon fLC = new formLuaChon(k, numberTest, question, lisst);
         fLC.getQContent().setText(question.getContent());
         loadData(fLC, lisst);
         fLC.setVisible(true);
         box.add(fLC);
-      /*  box.setPreferredSize(new Dimension(100, 100));
+        /*  box.setPreferredSize(new Dimension(100, 100));
         box.setVisible(true);
     /*    JScrollPane jScrollPane = new JScrollPane(box);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -221,13 +222,14 @@ public class admin1 extends javax.swing.JFrame {
         return fLC;
 
     }
-     public formLuaChon load_test1(int k, int numberTest, Question question, List<Answer> lisst) {
-       
+
+    public formLuaChon load_test1(int k, int numberTest, Question question, List<Answer> lisst) {
+
         content.setVisible(false);
         content.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         JPanel box = new JPanel();
         box.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
-        formLuaChon fLC = new formLuaChon(k,numberTest,question,lisst);
+        formLuaChon fLC = new formLuaChon(k, numberTest, question, lisst);
         fLC.getQContent().setText(question.getContent());
         loadData(fLC, lisst);
         //1fLC.setVisible(true);
@@ -236,7 +238,7 @@ public class admin1 extends javax.swing.JFrame {
         box.setVisible(true);
         JScrollPane jScrollPane = new JScrollPane(box);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-        jScrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight()+250));
+        jScrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight() + 250));
         jScrollPane.setVisible(true);
         content.add(jScrollPane);
         content.setVisible(true);
@@ -260,6 +262,7 @@ public class admin1 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
+        jLabel_Minimize = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -321,6 +324,23 @@ public class admin1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel_Minimize.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_Minimize.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Minimize.setText("-");
+        jLabel_Minimize.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255)));
+        jLabel_Minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -329,6 +349,8 @@ public class admin1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_Minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -336,7 +358,9 @@ public class admin1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel_Minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -462,35 +486,34 @@ public class admin1 extends javax.swing.JFrame {
         System.out.println(listAnswer.size());
         System.out.println(listda.size());
         System.out.println(listQuestion.size());
-        for(int i = 0;i<numberTest;i++){
+        for (int i = 0; i < numberTest; i++) {
             listPointOfTests.add(getByQid(i, listFormLuaChon.get(i)));
         }
         // TODO add your handling code here:
         boolean checkDone = true;
-       
-    
-        for(PointOfTest p:listPointOfTests){
-            if(!p.isChoose()){
+
+        for (PointOfTest p : listPointOfTests) {
+            if (!p.isChoose()) {
                 checkDone = false;
             }
             System.out.println(p.isChoose());
         }
-        if(checkDone){
+        if (checkDone) {
             int point = 0;
 
-            for(PointOfTest p:listPointOfTests){
+            for (PointOfTest p : listPointOfTests) {
 
-                if(p.isCorrect()){
+                if (p.isCorrect()) {
                     point++;
                 }
             }
-            ResultTest resultTest = new ResultTest(this.nameTest,this.topicName,point,numberTest,this.idTest);
+            ResultTest resultTest = new ResultTest(this.nameTest, this.topicName, point, numberTest, this.idTest);
             resultTest.show();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this,
-                "Có câu chưa được chọn!",
-                "Thông báo",
-                JOptionPane.ERROR_MESSAGE);
+                    "Có câu chưa được chọn!",
+                    "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
         }
         /*
         formLuaChon f = new formLuaChon();
@@ -506,8 +529,25 @@ public class admin1 extends javax.swing.JFrame {
         content.setAlignmentX((float) 50);
         content.setAlignmentY((float) 50);
         content.setVisible(true);
-        */
+         */
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel_MinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseClicked
+        // TODO add your handling code here:
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel_MinimizeMouseClicked
+
+    private void jLabel_MinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseEntered
+        // TODO add your handling code here:
+        Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
+        jLabel_Minimize.setBorder(label_border);
+    }//GEN-LAST:event_jLabel_MinimizeMouseEntered
+
+    private void jLabel_MinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseExited
+        // TODO add your handling code here:
+        Border label_border = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black);
+        jLabel_Minimize.setBorder(label_border);
+    }//GEN-LAST:event_jLabel_MinimizeMouseExited
 
     /**
      * @param args the command line arguments
@@ -529,20 +569,21 @@ public class admin1 extends javax.swing.JFrame {
             }
             // jtextTen.setText("hi");
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Doing_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Doing_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Doing_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Doing_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                new admin1().setVisible(true);
+                new Doing_test().setVisible(true);
 
             }
         });
@@ -559,6 +600,7 @@ public class admin1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Minimize;
     private javax.swing.JLabel jLabel_close;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

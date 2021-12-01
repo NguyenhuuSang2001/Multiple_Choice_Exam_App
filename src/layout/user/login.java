@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package layout;
+package layout.user;
 
 import com.laptrinhjavaweb.dao.IUserDAO;
 import dao.impl.UserDao;
@@ -12,7 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
-import layout.admin.admin1;
+import layout.admin.Home;
+import layout.user.register;
 import layout.user.register;
 import pojo.Users;
 
@@ -113,9 +114,7 @@ public class login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_App, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,8 +339,9 @@ public class login extends javax.swing.JFrame {
             }else{
                 us =u;
                 userID = u.getId();
+                
                 System.out.println(us.getName());
-                admin1 ad = new admin1();
+                Home ad = new Home();
                 // ad.jtextTen.setText("Hi "+u.getName()+"!");
                 this.dispose();
                 ad.show();

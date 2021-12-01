@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import layout.login;
+import layout.user.login;
 import pojo.History;
 import pojo.InforTest;
 
@@ -23,10 +23,10 @@ import pojo.InforTest;
  *
  * @author PC
  */
-public class admin4 extends javax.swing.JFrame {
+public class History_view extends javax.swing.JFrame {
 
     /**
-     * Creates new form admin4
+     * Creates new form History_view
      */
     DefaultTableModel tabelModel ;
   
@@ -35,7 +35,7 @@ public class admin4 extends javax.swing.JFrame {
      * Creates new form QLNLForm
      * @throws java.lang.Exception
      */
-    public admin4() throws Exception {
+    public History_view() throws Exception {
         initComponents();
         tabelModel = (DefaultTableModel) tabel.getModel();
         showNgachLUONG();
@@ -263,7 +263,7 @@ public class admin4 extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
-        admin1 am = new admin1();
+        Home am = new Home();
         this.dispose();
         am.show();
     }//GEN-LAST:event_jLabel_homeMouseClicked
@@ -285,23 +285,24 @@ public class admin4 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(History_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(History_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(History_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(History_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new admin4().setVisible(true);
+                    new History_view().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(admin4.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(History_view.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

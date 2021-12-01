@@ -212,19 +212,17 @@ public class formLuaChon extends javax.swing.JPanel {
         answer3 = new javax.swing.JRadioButton();
         answer4 = new javax.swing.JRadioButton();
 
-        setBackground(new java.awt.Color(0, 51, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         QName.setBackground(new java.awt.Color(255, 255, 255));
         QName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        QName.setForeground(new java.awt.Color(0, 0, 0));
         QName.setText("Question "+(1)+":");
 
         QContent.setBackground(new java.awt.Color(255, 255, 255));
         QContent.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        QContent.setForeground(new java.awt.Color(0, 0, 0));
         QContent.setText("Q");
 
         buttonGroup1.add(answer1);

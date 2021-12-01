@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import layout.edit_test;
-import layout.user.admin1;
+import layout.Edit_test;
+import layout.user.Doing_test;
 import pojo.TestDetail;
 
 /**
  *
  * @author PC
  */
-public class formTest extends javax.swing.JPanel {
+public class Form_test extends javax.swing.JPanel {
 
     /**
-     * Creates new form formTest
+     * Creates new form Form_test
      */
     private int k;
     private String nameTe;
@@ -63,7 +63,7 @@ public class formTest extends javax.swing.JPanel {
         this.datecr = datecr;
     }
 
-    public formTest(int k, int number, String nameTest, String topic) {
+    public Form_test(int k, int number, String nameTest, String topic) {
         this.k = k;
         this.nameTe = nameTest;
         this.topic = topic;
@@ -222,7 +222,7 @@ public class formTest extends javax.swing.JPanel {
             list = itesst.getByTestId(k);
             //user1 user = new user1(k, nameTe, topic, list, number);
             //user.setVisible(true);
-            layout.user.admin1 ad= new admin1(k, nameTe, topic, list, number);
+            layout.user.Doing_test ad= new Doing_test(k, nameTe, topic, list, number);
             ad.setVisible(true);
             //user.show();
         } else {
@@ -246,14 +246,14 @@ public class formTest extends javax.swing.JPanel {
         // TODO add your handling code here:
         //disable();
 
-        edit_test ed = null;
+        Edit_test ed = null;
         try {
-            ed = new edit_test(k, number,nameTe, topic, datecr);
+            ed = new Edit_test(k, number,nameTe, topic, datecr);
             //System.out.println("test: "+k);
             ed.show();
 
         } catch (Exception ex) {
-            Logger.getLogger(formTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Form_test.class.getName()).log(Level.SEVERE, null, ex);
         }
         ed.show();
 

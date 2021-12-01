@@ -10,22 +10,22 @@ import java.awt.Cursor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-import layout.login;
+import layout.user.login;
 import pojo.InforTest;
 
 /**
  *
  * @author PC
  */
-public class admin2 extends javax.swing.JFrame {
+public class Create_test extends javax.swing.JFrame {
 
     /**
-     * Creates new form admin2
+     * Creates new form Create_test
      */
     public static int testID;
     public static InforTest inforTest;
     
-    public admin2() {
+    public Create_test() {
         initComponents();
          this.setLocationRelativeTo(null);
     }
@@ -246,7 +246,7 @@ public class admin2 extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
-         admin1 am = new admin1();
+         Home am = new Home();
         this.dispose();
         am.show();
         
@@ -271,7 +271,7 @@ public class admin2 extends javax.swing.JFrame {
             inforTest = in.getInforTestByTestID(testID);
             
           //  form.date.setText(dateFormat.format(inforTest.getDateCreate()));
-        //    admin1.content.add(form);
+        //    Home.content.add(form);
           //  System.out.println(testID);
             if(testID == 0){
                  JOptionPane.showMessageDialog(this,
@@ -306,20 +306,21 @@ public class admin2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Create_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Create_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Create_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Create_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new admin2().setVisible(true);
+                new Create_test().setVisible(true);
             }
         });
     }

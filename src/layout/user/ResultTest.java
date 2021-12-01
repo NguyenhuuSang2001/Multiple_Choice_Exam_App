@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package layout.user;
-import layout.login;
 import dao.IHistory;
 import dao.impl.IHistoryImpl;
+import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import layout.admin.admin1;
+import javax.swing.border.Border;
+import layout.admin.Home;
 
 /**
  *
@@ -53,6 +56,7 @@ public class ResultTest extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jLabel_home = new javax.swing.JLabel();
+        jLabel_Minimize = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -104,6 +108,23 @@ public class ResultTest extends javax.swing.JFrame {
             }
         });
 
+        jLabel_Minimize.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_Minimize.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Minimize.setText("-");
+        jLabel_Minimize.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255)));
+        jLabel_Minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_MinimizeMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,8 +132,10 @@ public class ResultTest extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                 .addComponent(jLabel_home, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_Minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -123,7 +146,8 @@ public class ResultTest extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_Minimize))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -247,7 +271,7 @@ public class ResultTest extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
-        admin1 am = new admin1();
+        Home am = new Home();
         this.dispose();
         am.show();
         this.setLocationRelativeTo(null);
@@ -265,6 +289,23 @@ public class ResultTest extends javax.swing.JFrame {
           
         
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel_MinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseClicked
+        // TODO add your handling code here:
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel_MinimizeMouseClicked
+
+    private void jLabel_MinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseEntered
+        // TODO add your handling code here:
+        Border label_border = BorderFactory.createMatteBorder(1,1,1,1, Color.white);
+        jLabel_Minimize.setBorder(label_border);
+    }//GEN-LAST:event_jLabel_MinimizeMouseEntered
+
+    private void jLabel_MinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseExited
+        // TODO add your handling code here:
+        Border label_border = BorderFactory.createMatteBorder(0,0,0,0, Color.black);
+        jLabel_Minimize.setBorder(label_border);
+    }//GEN-LAST:event_jLabel_MinimizeMouseExited
 
     /**
      * @param args the command line arguments
@@ -310,6 +351,7 @@ public class ResultTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_Minimize;
     private javax.swing.JLabel jLabel_close;
     private javax.swing.JLabel jLabel_home;
     private javax.swing.JPanel jPanel1;

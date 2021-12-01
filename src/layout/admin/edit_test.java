@@ -4,6 +4,7 @@
  */
 package layout;
 
+import layout.user.login;
 import dao.IAnswer;
 import dao.IQuestion;
 import dao.ItestDetail;
@@ -22,7 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import layout.admin.admin1;
+import layout.admin.Home;
 import pojo.Answer;
 import pojo.Question;
 import pojo.TestDetail;
@@ -31,7 +32,7 @@ import pojo.TestDetail;
  *
  * @author Asus
  */
-public class edit_test extends javax.swing.JFrame {
+public class Edit_test extends javax.swing.JFrame {
     private int testId;
     private String testName;
     private String topicName;
@@ -39,7 +40,7 @@ public class edit_test extends javax.swing.JFrame {
     private int number;
     DefaultTableModel tabelModel1 ;
     DefaultTableModel tabelModel2 ;
-    public edit_test(int testId,int number,String testName,String topicName,String dateCreate) throws Exception {
+    public Edit_test(int testId,int number,String testName,String topicName,String dateCreate) throws Exception {
        this.testId = testId;
        this.testName = testName;
        this.topicName = topicName;
@@ -55,7 +56,7 @@ public class edit_test extends javax.swing.JFrame {
         
     }
 
-    public edit_test(){
+    public Edit_test(){
         
     }
     
@@ -548,7 +549,7 @@ public class edit_test extends javax.swing.JFrame {
 
     private void jLabel_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_homeMouseClicked
         // TODO add your handling code here:
-        admin1 am = new admin1();
+        Home am = new Home();
         this.dispose();
         am.show();
         //System.out.println("testid"+this.testId);
@@ -622,14 +623,15 @@ public class edit_test extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edit_test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -637,9 +639,9 @@ public class edit_test extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new edit_test().setVisible(true);
+                    new Edit_test().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(edit_test.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Edit_test.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

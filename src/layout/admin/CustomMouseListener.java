@@ -6,7 +6,7 @@ package layout.admin;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import layout.edit_test;
+import layout.Edit_test;
 
 /**
  *
@@ -21,7 +21,7 @@ public class CustomMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //edit_test ed = new edit_test();
+        //edit_test ed = new Edit_test();
         //int DISPOSE_ON_CLOSE = admin1.DISPOSE_ON_CLOSE;
         //ed.show();
     }
