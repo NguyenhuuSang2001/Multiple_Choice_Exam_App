@@ -36,18 +36,21 @@ public class edit_test extends javax.swing.JFrame {
     private String testName;
     private String topicName;
     private String dateCreate;
+    private int number;
     DefaultTableModel tabelModel1 ;
     DefaultTableModel tabelModel2 ;
-    public edit_test(int testId,String testName,String topicName,String dateCreate) throws Exception {
+    public edit_test(int testId,int number,String testName,String topicName,String dateCreate) throws Exception {
        this.testId = testId;
        this.testName = testName;
        this.topicName = topicName;
        this.dateCreate = dateCreate;
-       initComponents();
+       this.number = number;
+        initComponents();
         tabelModel1 = (DefaultTableModel) jTable1.getModel(); 
-        showTable1();
+        showTable1(testId);
         tabelModel2 = (DefaultTableModel) jTable2.getModel(); 
-        showTable2();
+        showTable2(testId);
+    //   initComponents();
        this.setLocationRelativeTo(null);
         
     }
@@ -90,11 +93,11 @@ public class edit_test extends javax.swing.JFrame {
     }
     
     
-    private void showTable1() throws Exception{
+    private void showTable1(int testId) throws Exception{
         IQuestion iq = new IQuestionImpl();
         List<Question> q = iq.getListByUserID(login.userID);
         ItestDetail i = new ItestDetailImpl();
-        List<TestDetail> listTestDetail = i.getByTestId(this.testId);
+        List<TestDetail> listTestDetail = i.getByTestId(testId);
         tabelModel1.setRowCount(0);
         if(listTestDetail.size()>0){
         for (Question lbl : q) {
@@ -107,17 +110,26 @@ public class edit_test extends javax.swing.JFrame {
                    check = false;
                }
            }
-           System.out.println(check);
+          // System.out.println(check);
            if(check){
                      tabelModel1.addRow(new Object[]{lbl.getId(),lbl.getContent()
             });
            }
            
-        }}
+        }}else {
+            for (Question lbl : q) {
+         
+          
+                     tabelModel1.addRow(new Object[]{lbl.getId(),lbl.getContent()
+            });
+           }
+           
+        }
+        
     }
-    private void showTable2() throws Exception{
+    private void showTable2(int testId) throws Exception{
         ItestDetail i = new ItestDetailImpl();
-        List<TestDetail> listTestDetail = i.getByTestId(this.testId);
+        List<TestDetail> listTestDetail = i.getByTestId(testId);
         tabelModel2.setRowCount(0);
         for (TestDetail lbl : listTestDetail) {
             IQuestion iq = new IQuestionImpl();
@@ -548,7 +560,7 @@ public class edit_test extends javax.swing.JFrame {
         int t = jTable1.getSelectedRow();
         if(t>-1){
         int Qid = (int) jTable1.getValueAt(t, 0);
-        String ctn = String.valueOf(jTable1.getValueAt(t, 0));
+        String ctn = String.valueOf(jTable1.getValueAt(t, 1));
         ItestDetail i = new ItestDetailImpl();
         boolean dg = i.saveQuestionInTest(this.testId, Qid);
         if(dg){
@@ -573,7 +585,7 @@ public class edit_test extends javax.swing.JFrame {
         int t = jTable2.getSelectedRow();
         if(t>-1){
         int Qid = (int) jTable2.getValueAt(t, 0);
-        String ctn = String.valueOf(jTable2.getValueAt(t, 0));
+        String ctn = String.valueOf(jTable2.getValueAt(t, 1));
         ItestDetail i = new ItestDetailImpl();
         boolean dg = i.delete(testId, Qid);
         if(dg){

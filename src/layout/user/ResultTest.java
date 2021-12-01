@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package layout.user;
-
+import layout.login;
+import dao.IHistory;
+import dao.impl.IHistoryImpl;
 import java.awt.Cursor;
+import javax.swing.JOptionPane;
 import layout.admin.admin1;
 
 /**
@@ -18,18 +21,21 @@ public class ResultTest extends javax.swing.JFrame {
      */
     private String testName;
     private String topic;
+    private int idtest;
     private int point;
     private int number;
     public ResultTest() {
        // initComponents();
     }
 
-    public ResultTest(String testName, String topic, int point,int number) {
+    public ResultTest(String testName, String topic, int point,int number,int idtest) {
         this.testName = testName;
         this.topic = topic;
         this.point = point;
         this.number = number;
+        this.idtest = idtest;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
 
@@ -159,6 +165,11 @@ public class ResultTest extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Save History");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,14 +190,13 @@ public class ResultTest extends javax.swing.JFrame {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
                                 .addComponent(jLabel5)
-                                .addGap(70, 70, 70)
+                                .addGap(73, 73, 73)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addComponent(jButton1)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +214,7 @@ public class ResultTest extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(56, 56, 56))
         );
@@ -243,7 +253,21 @@ public class ResultTest extends javax.swing.JFrame {
         admin1 am = new admin1();
         this.dispose();
         am.show();
+        this.setLocationRelativeTo(null);
     }//GEN-LAST:event_jLabel_homeMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        IHistory ih = new IHistoryImpl();
+        boolean check = ih.saveHistory(login.userID, idtest, point);
+        
+             JOptionPane.showMessageDialog(this,
+    "Lưu thành công",
+    "Thông báo",
+    JOptionPane.ERROR_MESSAGE);
+          
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

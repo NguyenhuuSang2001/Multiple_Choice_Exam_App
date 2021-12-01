@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package Respository.impl;
 
-import java.util.List;
+import Respository.HistoryRepository;
+import com.news.orm.impl.BaseResponsity;
+import java.io.Serializable;
 import pojo.History;
 
 /**
  *
  * @author PC
  */
-public interface IHistory {
-    List<History> getHistoryByUserId(int userID);
-    boolean deleteByUserID(int userId);
-    boolean saveHistory(int userId,int testId,int point);
+public class HistoryRepositoryImpl extends BaseResponsity<History, Integer> implements HistoryRepository{
+    
 }

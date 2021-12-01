@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import layout.login;
 import org.eclipse.persistence.jpa.jpql.tools.model.IPropertyChangeEvent;
 import pojo.Answer;
 import pojo.History;
@@ -103,14 +104,10 @@ public class MyTracNghiem {
             System.out.println(k);
         }*/
    // 1-10 random
-    ArrayList<Integer> listsssss = swap(4);
-        System.out.println(listsssss.get(0));
-         System.out.println(listsssss.get(1));
-          System.out.println(listsssss.get(2));
-           System.out.println(listsssss.get(3));
-    // listsss.forEach(i->System.out.println(i));
-        } // System.out.println(i.countQuestionInTest(1));
-       
+    IHistory ih = new IHistoryImpl();
+     boolean check = ih.saveHistory(5,7,3);
+    
+    }
 }
 
     

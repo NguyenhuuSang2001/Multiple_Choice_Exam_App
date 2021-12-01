@@ -72,8 +72,7 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
         String value = values.deleteCharAt(values.length()-1).toString();
         String column = columns.deleteCharAt(columns.length()-1).toString();
         insert = String.format(insert,column,value);
-       // System.out.println(value);
-      //  System.out.println(insert);
+       
         ConnectionManager conn = new ConnectionManager();
         try{
             Connection connection = conn.getConnection();
@@ -97,9 +96,9 @@ public class BaseResponsity<T,ID extends Serializable> implements JpaRepository<
                         }
                     }
                 });
-
+            
             pr.executeUpdate();
-         
+            //System.out.println(insert);
        
         } catch (SQLException ex) {
             Logger.getLogger(BaseResponsity.class.getName()).log(Level.SEVERE, null, ex);

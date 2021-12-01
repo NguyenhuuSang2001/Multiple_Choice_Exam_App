@@ -38,6 +38,9 @@ public class History {
         this.point = point;
     }
 
+    public History() {
+    }
+    
     
     public int getId() {
         return id;

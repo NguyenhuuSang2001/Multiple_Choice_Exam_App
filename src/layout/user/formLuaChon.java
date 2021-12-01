@@ -4,11 +4,15 @@
  */
 package layout.user;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import pojo.Answer;
 import pojo.PointOfTest;
@@ -33,7 +37,7 @@ public class formLuaChon extends javax.swing.JPanel {
     private Map<JRadioButton,Boolean> map;
      ArrayList<Integer> listRandom ;
     public formLuaChon() {
-       // initComponents();
+        //initComponents();
     }
 
     public formLuaChon(int k, int numberTest, Question question, List<Answer> lisst) {
@@ -62,6 +66,32 @@ public class formLuaChon extends javax.swing.JPanel {
     public JRadioButton getAnswer4() {
         return answer4;
     }
+
+    public void setAnswer1(JRadioButton answer1) {
+        this.answer1 = answer1;
+    }
+
+    public void setAnswer2(JRadioButton answer2) {
+        this.answer2 = answer2;
+    }
+
+    public void setAnswer3(JRadioButton answer3) {
+        this.answer3 = answer3;
+    }
+
+    public void setAnswer4(JRadioButton answer4) {
+        this.answer4 = answer4;
+    }
+
+    public JLabel getQContent() {
+        return QContent;
+    }
+
+    public void setQContent(JLabel QContent) {
+        this.QContent = QContent;
+    }
+    
+    
 
     public int getK() {
         return k;
@@ -173,6 +203,7 @@ public class formLuaChon extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         QName = new javax.swing.JLabel();
         QContent = new javax.swing.JLabel();
@@ -181,27 +212,32 @@ public class formLuaChon extends javax.swing.JPanel {
         answer3 = new javax.swing.JRadioButton();
         answer4 = new javax.swing.JRadioButton();
 
+        setBackground(new java.awt.Color(0, 51, 204));
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         QName.setBackground(new java.awt.Color(255, 255, 255));
         QName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         QName.setForeground(new java.awt.Color(0, 0, 0));
-        QName.setText("Question "+(k+1)+":");
+        QName.setText("Question "+(1)+":");
 
         QContent.setBackground(new java.awt.Color(255, 255, 255));
         QContent.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         QContent.setForeground(new java.awt.Color(0, 0, 0));
-        QContent.setText(this.question.getContent()
-        );
+        QContent.setText("Q");
 
-        answer1.setText("jRadioButton1");
+        buttonGroup1.add(answer1);
+        answer1.setText("1");
 
-        answer2.setText("jRadioButton2");
+        buttonGroup1.add(answer2);
+        answer2.setText("2");
 
-        answer3.setText("jRadioButton3");
+        buttonGroup1.add(answer3);
+        answer3.setText("3");
 
-        answer4.setText("jRadioButton4");
+        buttonGroup1.add(answer4);
+        answer4.setText("4");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -260,6 +296,16 @@ public class formLuaChon extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+     public static void main(String[] args) {
+        JFrame jFrame = new JFrame();
+        jFrame.setBounds(0, 0, 500, 500);
+        jFrame.setLayout(new FlowLayout(FlowLayout.CENTER));
+        formLuaChon form = new formLuaChon();
+        form.setVisible(true);
+        form.setBackground(Color.red);
+        jFrame.add(form);
+        jFrame.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel QContent;
@@ -269,6 +315,7 @@ public class formLuaChon extends javax.swing.JPanel {
     private javax.swing.JRadioButton answer3;
     private javax.swing.JRadioButton answer4;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

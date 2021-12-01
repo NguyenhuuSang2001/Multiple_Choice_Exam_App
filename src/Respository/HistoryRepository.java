@@ -2,17 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package Respository;
 
-import java.util.List;
+import orm.JpaRepository;
 import pojo.History;
 
 /**
  *
  * @author PC
  */
-public interface IHistory {
-    List<History> getHistoryByUserId(int userID);
-    boolean deleteByUserID(int userId);
-    boolean saveHistory(int userId,int testId,int point);
+public interface HistoryRepository extends JpaRepository<History,Integer>{
+    
 }

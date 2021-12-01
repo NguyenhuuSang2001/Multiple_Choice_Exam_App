@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import layout.edit_test;
+import layout.user.admin1;
 import layout.user.user1;
 import pojo.TestDetail;
 
@@ -220,8 +221,10 @@ public class formTest extends javax.swing.JPanel {
             List<TestDetail> list = new ArrayList<>();
             ItestDetail itesst = new ItestDetailImpl();
             list = itesst.getByTestId(k);
-            user1 user = new user1(k, nameTe, topic, list, number);
-            user.setVisible(true);
+            //user1 user = new user1(k, nameTe, topic, list, number);
+            //user.setVisible(true);
+            layout.user.admin1 ad= new admin1(k, nameTe, topic, list, number);
+            ad.setVisible(true);
             //user.show();
         } else {
             JOptionPane.showMessageDialog(this,
@@ -246,7 +249,7 @@ public class formTest extends javax.swing.JPanel {
 
         edit_test ed = null;
         try {
-            ed = new edit_test(k, nameTe, topic, datecr);
+            ed = new edit_test(k, number,nameTe, topic, datecr);
             //System.out.println("test: "+k);
             ed.show();
 

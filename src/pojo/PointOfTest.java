@@ -16,6 +16,7 @@ public class PointOfTest {
         this.choose = choose;
         this.correct = correct;
     }
+    
 
     public boolean isChoose() {
         return choose;

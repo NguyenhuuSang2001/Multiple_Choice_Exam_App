@@ -4,13 +4,23 @@
  */
 package dao.impl;
 
+import Respository.HistoryRepository;
+import Respository.UserRepository;
+import Respository.impl.HistoryRepositoryImpl;
+import Respository.impl.UserRepositoryImpl;
+import static com.news.Utils.AnnotationUtil.isAutoIncrement;
+import static com.news.Utils.ReflectionUtil.get;
+import com.news.orm.Annotation.Id;
+import com.news.orm.impl.BaseResponsity;
 import dao.IHistory;
+import exception.OrmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +28,7 @@ import pojo.Answer;
 import pojo.History;
 import responsity.ConnectionManager;
 import java.util.Date;
+import pojo.Users;
 
 /**
  *
@@ -68,6 +79,33 @@ public class IHistoryImpl implements IHistory{
             Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
         return false;
+    }
+
+    @Override
+    public boolean saveHistory(int userId, int testId, int point) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //int k = 0;
+        boolean t = true;
+        if(t){
+           // historyRepository.save(his);
+               ConnectionManager conn = new ConnectionManager();
+            try (Connection connection = conn.getConnection()) {
+                String sql = "INSERT INTO history(UserID,TestID,Point) VALUES (?,?,?);";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, userId);
+                ps.setInt(2, testId);
+                ps.setInt(3, point);
+
+                ps.executeUpdate();
+              
+              
+            } catch (SQLException ex) { 
+            Logger.getLogger(IinfortestImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        //return t;
+    }
+        return t;
     }
     
 }
